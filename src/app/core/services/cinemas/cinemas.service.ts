@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CinemasService extends BaseService<Cinema> {
-  override endpoint = 'cinema'
+  override endpoint = 'cinemas'
 
   saveCinema(cinema: Cinema): Observable<Cinema> {
     return this.http.put<Cinema>(`${this.endpoint}`, cinema)

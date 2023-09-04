@@ -21,6 +21,7 @@ import { appInitializerFn } from './app.initializer';
 import { ConfigService } from './core/services/config/config.service';
 import { MaterialModule } from './material.module';
 import { httpInterceptorProviders } from './core/services/http-interceptors';
+import { TableBaseComponent } from './components/table-base/table-base.component';
 
 @NgModule({
   declarations: [

@@ -5,6 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
  const modules = [
@@ -16,7 +19,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   MatListModule,
   MatCardModule,
   MatGridListModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTableModule,
+  MatPaginatorModule,
 ]
 @NgModule({
   imports: modules,

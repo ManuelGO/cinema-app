@@ -1,0 +1,34 @@
+{
+  "extensions.ignoreRecommendations": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js.map": true
+  },
+  "files.autoSave": "off",
+  "editor.autoIndent": "full",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": false,
+    "source.organizeImports": true
+  },
+  "typescript.format.enable": false,
+  "prettier.printWidth": 180,
+  "prettier.singleQuote": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 0,
+  "diffEditor.renderSideBySide": true,
+  "eslint.validate": ["javascript", "typescript", "html"],
+  "eslint.options": {
+    "extensions": [".ts", ".html"]
+  },
+  "angular.enable-strict-mode-prompt": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
