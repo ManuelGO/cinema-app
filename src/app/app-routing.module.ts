@@ -3,12 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent},
-  { path: 'cinemas', loadChildren: () => import('src/app/modules/cinema/cinema.module').then(m => m.CinemaModule)}
+  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'cinemas',
+    loadChildren: () =>
+      import('src/app/modules/cinema/cinema.module').then(
+        (m) => m.CinemaModule
+      ),
+  },
+  {
+    path: 'movies',
+    loadChildren: () =>
+      import('src/app/modules/movies/movies.module').then(
+        (m) => m.MoviesModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
