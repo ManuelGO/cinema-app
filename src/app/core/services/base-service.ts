@@ -12,7 +12,12 @@ export abstract class BaseService<T> {
   ): Observable<PageableResponse<T>> {
     const params = new HttpParams()
       .set('size', pageSize)
-      .set('page', pageIndex);
+      .set('page', pageIndex)
+      .set('sort', 'id,desc');
     return this.http.get<PageableResponse<T>>(this.endpoint, { params });
+  }
+
+  saveItem(item: T): Observable<T> {
+    return this.http.put<T>(this.endpoint, item);
   }
 }

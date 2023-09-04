@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import { delay, of } from 'rxjs';
 import { Movie } from '../../models/movie';
 import { BaseService } from '../base-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MoviesService extends BaseService<Movie> {
-  override endpoint = 'movies'
-  readonly moreParams = {
-    pageable: {
-      pageNumber: 1
-    }
+  override endpoint = 'movies';
+
+  public testRequest() {
+    // return throwError('This is an error!').pipe(delay(2000));
+    return of({
+      title: 'Simulating HTTP Requests',
+      content: 'This is off the hook!!',
+    }).pipe(delay(2000));
   }
-
-
 }

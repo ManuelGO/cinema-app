@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs';
 import { Movie } from 'src/app/core/models/movie';
 import { MoviesService } from 'src/app/core/services/movies/movies.service';
+import { DialogService } from './../../../core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +16,10 @@ export class ListComponent {
   totalElements!: number;
   pageSizes = [10, 15, 20];
   isLoading!: boolean;
-  constructor(private moviesService: MoviesService) {}
+  constructor(
+    private moviesService: MoviesService,
+    private dialogService: DialogService
+  ) {}
   loadData(event: any) {
     return this.moviesService
       .getPaginatedList(event.pageSize, event.pageIndex)
@@ -26,5 +30,10 @@ export class ListComponent {
         })
       )
       .subscribe();
+  }
+  onClick() {
+    this.dialogService
+      .showFormDialog(this.moviesService)
+      .subscribe((l) => console.log(l));
   }
 }
