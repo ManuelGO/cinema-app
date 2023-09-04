@@ -1,12 +1,12 @@
 <div class="form-container">
-  <h1 mat-dialog-title>Add movie</h1>
+  <h1 mat-dialog-title>Add {{data.entity | titlecase}}</h1>
   <div mat-dialog-content>
         <form [formGroup]="form">
           <mat-form-field appearance="outline" >
-            <mat-label>Movie name</mat-label>
+            <mat-label> {{data.entity | titlecase}} name</mat-label>
             <input matInput placeholder="Placeholder" formControlName="name">
           </mat-form-field>
-          <mat-form-field appearance="outline" >
+          <mat-form-field appearance="outline" *ngIf="data.entity === types.MOVIE">
             <mat-label>Movie runtime</mat-label>
             <input matInput placeholder="Placeholder" formControlName="runtime" type="number">
           </mat-form-field>

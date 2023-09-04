@@ -1,8 +1,7 @@
-<div>
-  <button mat-flat-button color="primary" (click)="onClick()">
-    Guardar
+  <button mat-flat-button color="primary" (click)="addItem()" class="btn-add">
+    Add a movie
   </button>
-</div>
+
 <div class="table-container">
   <app-table-base [displayedColumns]="displayedColumns" [dataSource]="dataSource" [totalElements]="totalElements" (loadData)="loadData($event)" ></app-table-base>
 </div>

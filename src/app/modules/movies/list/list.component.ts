@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs';
+import { EntityType } from 'src/app/core/models/entity-type.enum';
 import { Movie } from 'src/app/core/models/movie';
 import { MoviesService } from 'src/app/core/services/movies/movies.service';
 import { DialogService } from './../../../core/services/dialog/dialog.service';
@@ -31,9 +32,9 @@ export class ListComponent {
       )
       .subscribe();
   }
-  onClick() {
+  addItem() {
     this.dialogService
-      .showFormDialog(this.moviesService)
+      .showFormDialog(this.moviesService, EntityType.MOVIE)
       .subscribe((l) => console.log(l));
   }
 }

@@ -7,12 +7,13 @@ import { FormBaseComponent } from 'src/app/components/form-base/form-base.compon
 })
 export class DialogService {
   constructor(private dialog: MatDialog) {}
-  showFormDialog(service: any) {
+  showFormDialog(service: any, entity: string) {
     const dialogRef = this.dialog.open(FormBaseComponent, {
       width: '40%',
       height: '40%',
       data: {
         service,
+        entity,
       },
     });
     return dialogRef.afterClosed();
