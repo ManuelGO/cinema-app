@@ -12,11 +12,12 @@ import { DialogService } from 'src/app/core/services/dialog/dialog.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  displayedColumns = ['id', 'name', 'screens'];
+  displayedColumns = ['id', 'name', 'screens', 'create'];
   dataSource = new MatTableDataSource<Cinema>();
   totalElements!: number;
   pageSizes = [10, 15, 20];
   isLoading!: boolean;
+  entityType = EntityType;
   constructor(
     private cinemasService: CinemasService,
     private dialogService: DialogService
@@ -32,9 +33,16 @@ export class ListComponent {
       )
       .subscribe();
   }
-  addItem() {
+  addCinema() {
+    this.addItem(EntityType.CINEMA);
+  }
+  addScreen(entityId: number) {
+    console.log(entityId);
+    this.addItem(EntityType.SCREEN, entityId);
+  }
+  addItem(entityType: string, entityId?: number) {
     this.dialogService
-      .showFormDialog(this.cinemasService, EntityType.CINEMA)
+      .showFormDialog(this.cinemasService, entityType, entityId)
       .subscribe((l) => console.log(l));
   }
 }

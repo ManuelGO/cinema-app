@@ -20,6 +20,7 @@ export class TableBaseComponent<T> implements AfterViewInit {
   @Input() dataSource = new MatTableDataSource<T>();
   @Input() totalElements!: number;
   @Output() loadData = new EventEmitter<any>();
+  @Output() addNewItem = new EventEmitter<any>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageSizes = [10, 15, 20];
 
@@ -39,5 +40,9 @@ export class TableBaseComponent<T> implements AfterViewInit {
         )
         .subscribe();
     }
+  }
+
+  addItem(entity: T) {
+    this.addNewItem.emit(entity);
   }
 }

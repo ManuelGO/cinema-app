@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { PageableResponse } from '../models/pageable-response';
 @Injectable()
 export abstract class BaseService<T> {
@@ -17,7 +17,11 @@ export abstract class BaseService<T> {
     return this.http.get<PageableResponse<T>>(this.endpoint, { params });
   }
 
-  saveItem(item: T): Observable<T> {
-    return this.http.put<T>(this.endpoint, item);
+  saveItem(item: T, type?: string, entityId?: number): Observable<T> {
+    console.log(item);
+    // create screen PUT /cinemas/{c_id}/screens/{s_id}/screenings
+    //create screening / PUT /cinemas/{id}/screens
+    return of({} as T);
+    // return this.http.put<T>(this.endpoint, item);
   }
 }

@@ -25,7 +25,11 @@ export class FormBaseComponent implements OnInit {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<FormBaseComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { service: BaseService<any>; entity: string }
+    public data: {
+      service: BaseService<any>;
+      entityType: string;
+      entityId: number;
+    }
   ) {}
   ngOnInit() {
     console.log(this.data);
@@ -39,7 +43,7 @@ export class FormBaseComponent implements OnInit {
         ],
       ],
     });
-    if (this.data.entity === this.types.MOVIE) {
+    if (this.data.entityType === this.types.MOVIE) {
       this.form.addControl(
         'runtime',
         new FormControl('', [
@@ -48,7 +52,7 @@ export class FormBaseComponent implements OnInit {
           Validators.min(1),
         ])
       );
-    } else if (this.data.entity === this.types.CINEMA) {
+    } else if (this.data.entityType === this.types.CINEMA) {
     }
   }
 
@@ -59,7 +63,7 @@ export class FormBaseComponent implements OnInit {
   save() {
     this.loadingStatus.next(this.status.LOADING);
     this.data.service
-      .saveItem(this.form.value)
+      .saveItem(this.form.value, this.data.entityType, this.data.entityId)
       .pipe(
         catchError((err) => {
           this.loadingStatus.next(this.status.FAILED);

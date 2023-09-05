@@ -1,20 +1,36 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../base-service';
-import { Cinema } from '../../models/cinema';
+import { Observable, of } from 'rxjs';
 import { BaseEntity } from '../../models/base-entity';
-import { Observable } from 'rxjs';
+import { Cinema } from '../../models/cinema';
+import { EntityType } from '../../models/entity-type.enum';
+import { BaseService } from '../base-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CinemasService extends BaseService<Cinema> {
-  override endpoint = 'cinemas'
+  override endpoint = 'cinemas';
 
-  saveCinema(cinema: Cinema): Observable<Cinema> {
-    return this.http.put<Cinema>(`${this.endpoint}`, cinema)
+  override saveItem(newItem: Cinema, type?: string, entityId?: number) {
+    console.log(type);
+    switch (type) {
+      case EntityType.CINEMA:
+        console.log('adding cinema');
+        // return super.saveItem(cinema);
+        break;
+      case EntityType.SCREEN:
+        // return this.saveScreen(cinema.id!, extras!) as any;
+        console.log('adding screen', `${this.endpoint}/${entityId}/screens`);
+        return this.saveScreen(entityId!, newItem);
+    }
+
+    return of({ foo: 'bar' } as any);
   }
 
   saveScreen(cinemaId: number, screen: BaseEntity): Observable<BaseEntity> {
-    return this.http.put<BaseEntity> (`${this.endpoint}/${cinemaId}/screens`, screen);
+    return this.http.put<BaseEntity>(
+      `${this.endpoint}/${cinemaId}/screens`,
+      screen
+    );
   }
 }

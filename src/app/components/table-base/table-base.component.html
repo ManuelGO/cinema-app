@@ -20,6 +20,16 @@
     <th mat-header-cell *matHeaderCellDef> runtime </th>
     <td mat-cell *matCellDef="let element"> {{element.runtime}} </td>
   </ng-container>
+
+  <ng-container matColumnDef="create">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation(); addItem(element)">
+      <button mat-button>
+        <mat-icon>add</mat-icon>
+        Add screens
+    </button>
+    </td>
+  </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="row.id"  [state]="row"></tr>
 </table>
