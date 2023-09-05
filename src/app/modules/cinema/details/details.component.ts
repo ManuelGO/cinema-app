@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { BaseEntity } from 'src/app/core/models/base-entity';
 import { EntityType } from 'src/app/core/models/entity-type.enum';
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
@@ -15,14 +16,27 @@ import { Cinema } from './../../../core/models/cinema';
 export class DetailsComponent {
   cinema!: Cinema;
   displayedColumns = ['id', 'name'];
-  dataSource = new MatTableDataSource<BaseEntity>();
+  screenDataSource = new MatTableDataSource<BaseEntity>();
+  screeningDataSource = new MatTableDataSource<BaseEntity>();
+  screeningTotal!: number;
   constructor(
     private router: Router,
     private dialogService: DialogService,
     private cinemasService: CinemasService
   ) {
     this.cinema = this.router.getCurrentNavigation()?.extras.state as Cinema;
-    this.dataSource = new MatTableDataSource<BaseEntity>(this.cinema.screens);
+    this.screenDataSource = new MatTableDataSource<BaseEntity>(
+      this.cinema.screens
+    );
+    this.cinemasService
+      .listScreenings(this.cinema.id!)
+      .pipe(
+        tap((list) => {
+          this.screeningDataSource = new MatTableDataSource(list.content);
+          this.screeningTotal = list.numberOfElements;
+        })
+      )
+      .subscribe();
   }
 
   addScreen() {

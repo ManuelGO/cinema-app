@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { BaseEntity } from '../../models/base-entity';
 import { Cinema } from '../../models/cinema';
 import { EntityType } from '../../models/entity-type.enum';
+import { PageableResponse } from '../../models/pageable-response';
 import { BaseService } from '../base-service';
 
 @Injectable({
@@ -31,6 +32,12 @@ export class CinemasService extends BaseService<Cinema> {
     return this.http.put<BaseEntity>(
       `${this.endpoint}/${cinemaId}/screens`,
       screen
+    );
+  }
+
+  listScreenings(cinemaId: number): Observable<PageableResponse<BaseEntity>> {
+    return this.http.get<PageableResponse<BaseEntity>>(
+      `${this.endpoint}/${cinemaId}/screenings`
     );
   }
 }

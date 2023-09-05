@@ -13,7 +13,8 @@ export abstract class BaseService<T> {
     const params = new HttpParams()
       .set('size', pageSize)
       .set('page', pageIndex)
-      .set('sort', 'id,desc');
+      .set('sort', 'id,desc')
+      .set('search', 'name,landia');
     return this.http.get<PageableResponse<T>>(this.endpoint, { params });
   }
 

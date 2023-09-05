@@ -7,7 +7,15 @@
       Add a screen
     </button >
   </div>
+  <div>
+
+  </div>
   <div class="table-container">
-    <app-table-base [displayedColumns]="displayedColumns" [dataSource]="dataSource" [totalElements]="cinema.screens.length"></app-table-base>
+    <div class="left-table">
+      <app-table-base [displayedColumns]="displayedColumns" [dataSource]="screenDataSource" [totalElements]="cinema.screens.length"></app-table-base>
+    </div>
+    <div class="right-table">
+      <app-table-base [displayedColumns]="displayedColumns" [dataSource]="screeningDataSource" [totalElements]="screeningTotal"></app-table-base>
+    </div>
   </div>
 </div>
