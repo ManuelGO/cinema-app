@@ -1,2 +1,13 @@
-<p>details works!</p>
-{{cinema | json}}
+<div class="page">
+  <div>
+    <h1>Viewing cinema {{cinema.name}}</h1>
+  </div>
+  <div>
+    <button mat-flat-button color="primary" (click)="addScreen()">
+      Add a screen
+    </button >
+  </div>
+  <div class="table-container">
+    <app-table-base [displayedColumns]="displayedColumns" [dataSource]="dataSource" [totalElements]="cinema.screens.length"></app-table-base>
+  </div>
+</div>

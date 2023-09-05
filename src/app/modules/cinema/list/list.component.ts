@@ -37,7 +37,6 @@ export class ListComponent {
     this.addItem(EntityType.CINEMA);
   }
   addScreen(entityId: number) {
-    console.log(entityId);
     this.addItem(EntityType.SCREEN, entityId);
   }
   addItem(entityType: string, entityId?: number) {
