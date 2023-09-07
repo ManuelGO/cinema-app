@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
@@ -19,12 +20,15 @@ export class DetailsComponent {
   screenDataSource = new MatTableDataSource<BaseEntity>();
   screeningDataSource = new MatTableDataSource<BaseEntity>();
   screeningTotal!: number;
+  private destroyRef = inject(DestroyRef);
+
   constructor(
     private router: Router,
     private dialogService: DialogService,
     private cinemasService: CinemasService
   ) {
     this.cinema = this.router.getCurrentNavigation()?.extras.state as Cinema;
+
     this.screenDataSource = new MatTableDataSource<BaseEntity>(
       this.cinema.screens
     );
@@ -42,6 +46,7 @@ export class DetailsComponent {
   addScreen() {
     this.dialogService
       .showFormDialog(this.cinemasService, EntityType.SCREEN, this.cinema.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((l) => console.log(l));
   }
 }

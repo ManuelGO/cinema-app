@@ -24,7 +24,7 @@ export class ListComponent {
   ) {}
   loadData(event: any) {
     return this.cinemasService
-      .getPaginatedList(event.pageSize, event.pageIndex)
+      .getPaginatedList(event.pageSize, event.pageIndex, '', event.sort)
       .pipe(
         tap((response) => {
           this.totalElements = response.totalElements;

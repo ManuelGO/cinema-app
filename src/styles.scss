@@ -2,8 +2,22 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Poppins', sans-serif; color: #5d6d81;}
 
 .table-container {
   padding: 20px
+}
+
+table .mat-mdc-table, thead {
+  border-radius: 15px !important;
+  overflow: hidden !important;
+}
+
+.mat-mdc-row, .mat-mdc-cell {
+  border-bottom: 1px solid #d8e2ef !important;
+  border-top: 0 !important;
+}
+
+thead {
+  background-color: #f9fafd !important;
 }

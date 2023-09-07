@@ -17,8 +17,7 @@ export class CinemasService extends BaseService<Cinema> {
     switch (type) {
       case EntityType.CINEMA:
         console.log('adding cinema');
-        // return super.saveItem(cinema);
-        break;
+        return super.saveItem(newItem);
       case EntityType.SCREEN:
         // return this.saveScreen(cinema.id!, extras!) as any;
         console.log('adding screen', `${this.endpoint}/${entityId}/screens`);

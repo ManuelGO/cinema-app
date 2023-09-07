@@ -3,12 +3,6 @@
   padding: 8px
 }
 
-.mat-mdc-row .mat-mdc-cell {
-  border-bottom: 1px solid #ECECEC;
-  border-top: 1px solid #ECECEC;
-  cursor: pointer;
-}
-
 .mat-mdc-row:hover .mat-mdc-cell {
   border-color: currentColor;
   background-color: aliceblue;
@@ -16,4 +10,19 @@
 
 .demo-row-is-clicked {
   font-weight: bold;
+}
+
+table .mat-mdc-table, thead {
+  border-radius: 15px !important;
+  overflow: hidden !important;
+}
+
+.mat-mdc-row, .mat-mdc-cell {
+  border-bottom: 1px solid #edf2f9 !important;
+  border-top: 0 !important;
+  cursor: pointer;
+}
+
+thead {
+  background-color: #f9fafd !important;
 }

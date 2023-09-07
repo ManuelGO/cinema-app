@@ -1,3 +1,17 @@
 <p>details works!</p>
 
 {{ movie | json}}
+<div class="page">
+  <div>
+    <h1>Viewing Movie {{movie.name}}</h1>
+  </div>
+  <div>
+    <button mat-flat-button color="primary" >
+      Add a screenning
+    </button >
+  </div>
+  <div>
+    <app-search-input></app-search-input>
+
+  </div>
+</div>

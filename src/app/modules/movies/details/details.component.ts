@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/core/models/movie';
 
@@ -7,9 +8,15 @@ import { Movie } from 'src/app/core/models/movie';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   movie!: Movie;
-  constructor(private router: Router) {
+  form!: FormGroup;
+  constructor(private router: Router, private fb: FormBuilder) {
     this.movie = this.router.getCurrentNavigation()?.extras.state as Movie;
+    this.form = this.fb.group({
+      //  searchText: [],
+    });
+    console.log('details');
   }
+  ngOnInit(): void {}
 }

@@ -18,6 +18,11 @@ const routes: Routes = [
         (m) => m.MoviesModule
       ),
   },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

@@ -8,13 +8,15 @@ export abstract class BaseService<T> {
   constructor(protected http: HttpClient) {}
   getPaginatedList(
     pageSize: number,
-    pageIndex: number
+    pageIndex: number,
+    searchText: string = '',
+    sort: string = 'id,desc'
   ): Observable<PageableResponse<T>> {
     const params = new HttpParams()
       .set('size', pageSize)
       .set('page', pageIndex)
-      .set('sort', 'id,desc')
-      .set('search', 'name,landia');
+      .set('sort', sort)
+      .set('search', searchText);
     return this.http.get<PageableResponse<T>>(this.endpoint, { params });
   }
 

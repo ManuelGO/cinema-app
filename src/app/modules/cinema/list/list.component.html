@@ -2,5 +2,5 @@
   Add a cinema
 </button >
 <div class="table-container">
-  <app-table-base [displayedColumns]="displayedColumns" [dataSource]="dataSource" [totalElements]="totalElements" (loadData)="loadData($event)" (addNewItem)="addScreen($event.id)"></app-table-base>
+  <app-table-base [allowNavigation]="true"   [displayedColumns]="displayedColumns" [dataSource]="dataSource" [totalElements]="totalElements" (loadData)="loadData($event)" (addNewItem)="addScreen($event.id)"></app-table-base>
 </div>
