@@ -22,10 +22,11 @@ export class TableBaseComponent<T> implements AfterViewInit {
   @Input() totalElements!: number;
   @Output() loadData = new EventEmitter<any>();
   @Output() addNewItem = new EventEmitter<any>();
+  @Output() rowSelected = new EventEmitter<any>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() allowNavigation: boolean = false;
-  pageSizes = [10, 15, 20];
+  @Input() pageSizes = [10, 15, 20];
 
   ngAfterViewInit(): void {
     this.setupDataTable();
@@ -53,5 +54,8 @@ export class TableBaseComponent<T> implements AfterViewInit {
 
   addItem(entity: T) {
     this.addNewItem.emit(entity);
+  }
+  onSelect(ev: any, r: any) {
+    this.rowSelected.emit(r);
   }
 }

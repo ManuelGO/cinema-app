@@ -1,5 +1,15 @@
  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="id" matSortDirection="desc">
   <caption>Small description here</caption>
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+
+    </th>
+    <td mat-cell *matCellDef="let row">
+      test {{row?.screens?.length}}
+      <mat-radio-button (change)="onSelect($event, row)">
+      </mat-radio-button>
+    </td>
+  </ng-container>
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef  mat-sort-header> Id </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -19,6 +29,21 @@
   <ng-container matColumnDef="runtime">
     <th mat-header-cell *matHeaderCellDef> runtime </th>
     <td mat-cell *matCellDef="let element"> {{element.runtime}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cinemaName">
+    <th mat-header-cell *matHeaderCellDef> cinemaName </th>
+    <td mat-cell *matCellDef="let element"> {{element.cinemaName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="movieName">
+    <th mat-header-cell *matHeaderCellDef> movieName </th>
+    <td mat-cell *matCellDef="let element"> {{element.movieName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef> startDate </th>
+    <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
   </ng-container>
 
   <ng-container matColumnDef="create">

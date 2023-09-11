@@ -5,6 +5,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
+  {
     path: 'cinemas',
     loadChildren: () =>
       import('src/app/modules/cinema/cinema.module').then(
@@ -19,9 +24,15 @@ const routes: Routes = [
       ),
   },
   {
-    path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full',
+    path: 'bookings',
+    loadChildren: () =>
+      import('src/app/modules/booking/booking.module').then(
+        (m) => m.BookingModule
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
   },
 ];
 

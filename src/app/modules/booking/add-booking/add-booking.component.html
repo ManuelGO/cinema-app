@@ -1,0 +1,42 @@
+<div>
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+        <ng-template matStepLabel>Select a Cinema </ng-template>
+        <app-table-base [displayedColumns]="displayedColumns" [dataSource]="dataSource" [totalElements]="totalElements" (loadData)="loadData($event)" [pageSizes]="pageSizes" (rowSelected)="setScreeningDs($event)"></app-table-base>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Select a Screening </ng-template>
+      <app-table-base [displayedColumns]="displayedColumns2" [dataSource]="screeningsDs" [totalElements]="totalElements" (loadData)="loadData($event)" [pageSizes]="pageSizes" (rowSelected)="screeningSelected($event)"></app-table-base>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+        </div>
+   </mat-step>
+   <mat-step [stepControl]="fromGroup">
+    <form [formGroup]="fromGroup">
+      <ng-template matStepLabel>Number of seats to book</ng-template>
+      <mat-form-field>
+        <mat-label>Seats to book</mat-label>
+        <input matInput placeholder="" formControlName="seats" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext [disabled]="fromGroup.invalid">Next</button>
+
+      </div>
+    </form>
+  </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Sumary</ng-template>
+      <div>
+        We're going to create a booking for screen {{selectedScreen?.name || selectedScreen?.id}} with {{fromGroup.controls.seats.value}} seats.
+        <button mat-flat-button color="primary" (click)="addBooking()">
+          Add the booking
+        </button >
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

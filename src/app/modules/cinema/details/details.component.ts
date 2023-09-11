@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { BaseEntity } from 'src/app/core/models/base-entity';
 import { EntityType } from 'src/app/core/models/entity-type.enum';
+import { Screening } from 'src/app/core/models/screening';
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { Cinema } from './../../../core/models/cinema';
@@ -18,7 +19,7 @@ export class DetailsComponent {
   cinema!: Cinema;
   displayedColumns = ['id', 'name'];
   screenDataSource = new MatTableDataSource<BaseEntity>();
-  screeningDataSource = new MatTableDataSource<BaseEntity>();
+  screeningDataSource = new MatTableDataSource<Screening>();
   screeningTotal!: number;
   private destroyRef = inject(DestroyRef);
 

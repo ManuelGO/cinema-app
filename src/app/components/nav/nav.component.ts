@@ -1,7 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
+import { menuItems } from './menu-items';
 
 @Component({
   selector: 'app-nav',
@@ -10,11 +11,15 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class NavComponent {
   private breakpointObserver = inject(BreakpointObserver);
-  menuItems = ['dashboard', 'cinemas', 'movies', 'customers', 'products'];
-
+  menuItems = menuItems;
+  trackByItems(index: number, item: any): number {
+    return item.trackId;
+  }
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
+      tap((r) => console.log(r)),
+
       map((result) => result.matches),
       shareReplay()
     );

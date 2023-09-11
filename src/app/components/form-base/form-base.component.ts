@@ -16,14 +16,14 @@ import { BaseService } from 'src/app/core/services/base-service';
   templateUrl: './form-base.component.html',
   styleUrls: ['./form-base.component.scss'],
 })
-export class FormBaseComponent implements OnInit {
+export class FormBaseComponent<T> implements OnInit {
   form!: FormGroup;
   status = LoadingStatus;
   types = EntityType;
   loadingStatus = new BehaviorSubject<string>('');
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<FormBaseComponent>,
+    private dialogRef: MatDialogRef<FormBaseComponent<T>>,
     @Inject(MAT_DIALOG_DATA)
     public data: {
       service: BaseService<any>;
@@ -32,7 +32,6 @@ export class FormBaseComponent implements OnInit {
     }
   ) {}
   ngOnInit() {
-    console.log(this.data);
     this.form = this.fb.group({
       name: [
         '',

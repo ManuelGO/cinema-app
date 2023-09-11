@@ -11,8 +11,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -34,9 +36,10 @@ const modules = [
   MatProgressSpinnerModule,
   MatAutocompleteModule,
   MatSortModule,
+  MatStepperModule,
+  MatRadioModule,
 ];
 @NgModule({
-  //imports: modules,
   exports: modules,
 })
 export class MaterialModule {}

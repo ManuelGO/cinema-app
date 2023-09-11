@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { BaseEntity } from '../../models/base-entity';
 import { Cinema } from '../../models/cinema';
 import { EntityType } from '../../models/entity-type.enum';
 import { PageableResponse } from '../../models/pageable-response';
+import { Screening, ScreeningRaw } from '../../models/screening';
 import { BaseService } from '../base-service';
 
 @Injectable({
@@ -34,9 +35,23 @@ export class CinemasService extends BaseService<Cinema> {
     );
   }
 
-  listScreenings(cinemaId: number): Observable<PageableResponse<BaseEntity>> {
-    return this.http.get<PageableResponse<BaseEntity>>(
-      `${this.endpoint}/${cinemaId}/screenings`
-    );
+  listScreenings(cinemaId: number): Observable<PageableResponse<Screening>> {
+    return this.http
+      .get<PageableResponse<ScreeningRaw>>(
+        `${this.endpoint}/${cinemaId}/screenings`
+      )
+      .pipe(
+        map((response) => {
+          const items = response.content;
+          const newITems = items.map((item) => ({
+            cinemaName: item.cinemaName,
+            id: item.id,
+            screenName: item.screenName,
+            movieName: item.movie.name,
+            startDate: item.start,
+          }));
+          return { ...response, content: newITems };
+        })
+      );
   }
 }
