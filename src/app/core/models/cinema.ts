@@ -1,5 +1,6 @@
-import { BaseEntity } from "./base-entity";
+import { BaseEntity } from './base-entity';
+import { Screen } from './screen';
 
-export interface Cinema extends BaseEntity{
- screens: BaseEntity[];
+export interface Cinema extends BaseEntity {
+  screens: Screen[];
 }

@@ -31,6 +31,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'screenings',
+    loadChildren: () =>
+      import('src/app/modules/screening/screening.module').then(
+        (m) => m.ScreeningModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

@@ -1,26 +1,25 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ConfigService } from '../config/config.service';
+import { APP_CONFIG } from 'src/main';
+import { Config } from '../../models/config';
 
 @Injectable()
 export class ApiUrlInterceptor implements HttpInterceptor {
+  constructor(@Inject(APP_CONFIG) public config: Config) {}
 
-  constructor(private configService: ConfigService) {}
-
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
-    if (request.url.includes('assets/config/config.json')) {
-      return next.handle(request);
-    }
-    const { apiUrl, apiVersion } = this.configService.config;
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    const { apiUrl, apiVersion } = this.config;
     const req = request.clone({
-      url: `${apiUrl}${apiVersion}/${request.url}`
+      url: `${apiUrl}${apiVersion}/${request.url}`,
     });
     return next.handle(req);
   }

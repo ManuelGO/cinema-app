@@ -7,14 +7,6 @@
     <mat-nav-list>
       <mat-nav-list *ngFor="let item of menuItems; trackBy: trackByItems">
         <a  mat-list-item [routerLink]="'/'+item.name"> {{item.name | titlecase}} </a>
-
-      <ul *ngIf="item.subMenu?.length">
-        <li *ngFor="let c of item.subMenu">
-          <a [routerLink]="c.url">
-            <span class="dot"></span> {{c.name}}
-          </a>
-        </li>
-      </ul>
         </mat-nav-list>
     </mat-nav-list>
 

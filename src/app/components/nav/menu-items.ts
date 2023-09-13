@@ -5,11 +5,6 @@ export const menuItems = [
   {
     name: 'bookings',
     trackID: 4,
-    subMenu: [
-      {
-        name: 'add booking',
-        url: 'bookings/add-booking',
-      },
-    ],
   },
+  { name: 'screenings', trackID: 5 },
 ];

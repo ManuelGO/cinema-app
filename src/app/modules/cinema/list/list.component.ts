@@ -23,6 +23,7 @@ export class ListComponent {
     private dialogService: DialogService
   ) {}
   loadData(event: any) {
+    // TODO interface
     return this.cinemasService
       .getPaginatedList(event.pageSize, event.pageIndex, '', event.sort)
       .pipe(

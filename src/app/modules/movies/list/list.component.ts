@@ -16,7 +16,6 @@ export class ListComponent {
   dataSource = new MatTableDataSource<Movie>();
   totalElements!: number;
   pageSizes = [10, 15, 20];
-  isLoading!: boolean;
   constructor(
     private moviesService: MoviesService,
     private dialogService: DialogService

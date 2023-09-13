@@ -63,7 +63,6 @@ export class AddBookingComponent {
       .subscribe();
   }
   screeningSelected(screen: Screen) {
-    console.log(screen);
     this.selectedScreen = screen;
     this.stepper.next();
   }
