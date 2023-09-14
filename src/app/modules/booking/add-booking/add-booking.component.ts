@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatStepper, MatStepperIntl } from '@angular/material/stepper';
+import { MatStepper } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs/operators';
 import { Cinema } from 'src/app/core/models/cinema';
@@ -15,49 +15,32 @@ import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
   styleUrls: ['./add-booking.component.scss'],
 })
 export class AddBookingComponent {
-  fromGroup = this._formBuilder.group({
+  fromGroup = this.formBuilder.group({
     seats: ['', Validators.required],
   });
   isLinear = false;
-  displayedColumns = ['id', 'name', 'select'];
-  displayedColumns2 = ['id', 'cinemaName', 'movieName', 'select'];
-  totalElements!: number;
-  pageSizes = [4];
+  cinemasColumns = ['id', 'name', 'select'];
+  screeningsColumns = ['id', 'cinemaName', 'movieName', 'select'];
   dataSource = new MatTableDataSource<Cinema>();
   screeningsDs = new MatTableDataSource<Screening>();
+  screeningLength!: number;
   @ViewChild(MatStepper) stepper!: MatStepper;
   selectedScreen!: Screen;
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private cinemasService: CinemasService,
-    private bookingsService: BookingsService,
-    private _matStepperIntl: MatStepperIntl
+    private bookingsService: BookingsService
   ) {}
-  loadData(event: any) {
-    return this.cinemasService
-      .getPaginatedList(event.pageSize, event.pageIndex, '', event.sort)
-      .pipe(
-        tap((response) => {
-          this.totalElements = response.totalElements;
-          this.dataSource = new MatTableDataSource(response.content);
-        })
-      )
-      .subscribe();
-  }
+
   setScreeningDs(cinema: Cinema) {
     this.cinemasService
       .listScreenings(cinema.id!)
       .pipe(
         tap((screenings) => {
-          if (!screenings.empty) {
-            this.screeningsDs = new MatTableDataSource(
-              screenings.content as any[]
-            );
-            this.stepper.next();
-          } else {
-            // TODO, HANDLE NO SCREENING CASE
-          }
+          this.screeningsDs = new MatTableDataSource(screenings.content);
+          this.screeningLength = screenings.numberOfElements;
+          this.stepper.next();
         })
       )
       .subscribe();

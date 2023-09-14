@@ -1,0 +1,11 @@
+<div class="table-container">
+  <app-table-base
+    [allowNavigation]="allowNavigation"
+    [displayedColumns]="displayedColumns"
+    [dataSource]="dataSource"
+    [totalElements]="totalElements"
+    (loadData)="loadData($event)"
+    (addNewItem)="requestScreenCreation($event.id)"
+    (rowSelected)="selected($event)"
+  ></app-table-base>
+</div>

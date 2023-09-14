@@ -27,6 +27,7 @@ export class TableBaseComponent<T> implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @Input() allowNavigation: boolean = false;
   @Input() pageSizes = [10, 15, 20];
+  @Input() tableCaption!: string;
 
   ngAfterViewInit(): void {
     this.setupDataTable();

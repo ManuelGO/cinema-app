@@ -11,40 +11,29 @@
           (rowSelected)="movieSelected($event)"
         ></app-table-base>
       </div>
-      <button mat-button matStepperNext>
-        Next
-      </button>
+      <button mat-button matStepperNext>Next</button>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>step2</ng-template>
-      <div class="table-container">
-        <app-table-base
-          [displayedColumns]="moviesColumns"
-          [dataSource]="cinemasDs"
-          [totalElements]="cinemasLengh"
-          (loadData)="loadCinemas($event)"
-          (rowSelected)="cinemaSelected($event)"
-        ></app-table-base>
-      </div>
+      <ng-template matStepLabel>Select a Cinema</ng-template>
+      <app-cinemas-list
+        [displayedColumns]="moviesColumns"
+        (cinemaSelected)="cinemaSelected($event)"
+      ></app-cinemas-list>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>
-          Next
-        </button>
+        <button mat-button matStepperNext>Next</button>
       </div>
-
     </mat-step>
     <mat-step>
       <div class="table-container">
         <app-table-base
           [displayedColumns]="moviesColumns"
           [dataSource]="screensDs"
-          [totalElements]="cinemasLengh"
-          (loadData)="loadCinemas($event)"
-          (rowSelected)="cinemaSelected($event)"
+          [totalElements]="screensLength"
+          (rowSelected)="screenSelected($event)"
         ></app-table-base>
       </div>
-
     </mat-step>
     <mat-step>
       <div>
@@ -53,32 +42,33 @@
           <mat-form-field>
             <mat-label>Seats to book</mat-label>
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="datepicker">
+            <input matInput [matDatepicker]="datepicker" />
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
               <mat-datepicker-actions>
                 <button mat-button matDatepickerCancel>Cancel</button>
-                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
               </mat-datepicker-actions>
             </mat-datepicker>
           </mat-form-field>
-                 </form>
+        </form>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>
-          Next
-        </button>
+        <button mat-button matStepperNext>Next</button>
       </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Sumary</ng-template>
 
-      </mat-step>
-      <mat-step >
-        <ng-template matStepLabel>Sumary</ng-template>
-
-        We're going to create a screen for 'movie name' at 'cinma name' on Septhember the 8th at 18:00
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>
-          Next
-        </button>
-      </mat-step>
+      We're going to create a screen for 'movie name' at 'cinma name' on
+      Septhember the 8th at 18:00
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </mat-step>
   </mat-stepper>
 </div>

@@ -2,23 +2,15 @@
   <mat-stepper [linear]="isLinear" #stepper>
     <mat-step>
       <ng-template matStepLabel>Select a Cinema </ng-template>
-      <app-table-base
-        [displayedColumns]="displayedColumns"
-        [dataSource]="dataSource"
-        [totalElements]="totalElements"
-        (loadData)="loadData($event)"
-        [pageSizes]="pageSizes"
-        (rowSelected)="setScreeningDs($event)"
-      ></app-table-base>
+      <app-cinemas-list [displayedColumns]="cinemasColumns" (cinemaSelected)="setScreeningDs($event)"></app-cinemas-list>
+
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Select a Screening </ng-template>
       <app-table-base
-        [displayedColumns]="displayedColumns2"
+        [displayedColumns]="screeningsColumns"
         [dataSource]="screeningsDs"
-        [totalElements]="totalElements"
-        (loadData)="loadData($event)"
-        [pageSizes]="pageSizes"
+        [totalElements]="screeningLength"
         (rowSelected)="screeningSelected($event)"
       ></app-table-base>
       <div>
