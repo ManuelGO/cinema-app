@@ -4,12 +4,11 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TableBaseModule } from 'src/app/components/table-base/table-base.module';
 import { MaterialModule } from 'src/app/material.module';
-import { DetailsComponent } from './details/details.component';
 import { ListComponent } from './list/list.component';
 import { MoviesRoutingModule } from './movies-routing.module';
 
 @NgModule({
-  declarations: [ListComponent, DetailsComponent],
+  declarations: [ListComponent],
   imports: [
     CommonModule,
     MoviesRoutingModule,
