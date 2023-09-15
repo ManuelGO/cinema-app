@@ -62,7 +62,7 @@
   </tr>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <ng-container *ngIf="allowNavigation; else noNav">
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="row.id" [state]="row"  class="navigation-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onNavigation(row)"  class="navigation-row"></tr>
   </ng-container>
   <ng-template #noNav>
     <tr  mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

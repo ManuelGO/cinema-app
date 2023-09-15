@@ -21,6 +21,8 @@ export class CinemasListComponent {
   entityType = EntityType;
   @Output() screenCreationRequested: EventEmitter<number> = new EventEmitter();
   @Output() cinemaSelected: EventEmitter<Cinema> = new EventEmitter();
+  @Output() navigate: EventEmitter<{ cinema: Cinema; params: TableLoadEvent }> =
+    new EventEmitter();
   lastLoadEvent$: BehaviorSubject<TableLoadEvent> = new BehaviorSubject({
     pageSize: 10,
     pageIndex: 0,
@@ -49,7 +51,9 @@ export class CinemasListComponent {
     this.loadData(this.lastLoadEvent$.value);
   }
   selected(cinema: Cinema) {
-    console.log(cinema);
     this.cinemaSelected.emit(cinema);
+  }
+  doNavigate(cinema: Cinema) {
+    this.navigate.emit({ cinema, params: this.lastLoadEvent$.value });
   }
 }

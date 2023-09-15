@@ -1,5 +1,5 @@
 <button mat-flat-button color="primary" (click)="addCinema()">
   Add a cinema
 </button >
-<app-cinemas-list (screenCreationRequested)="createScreen($event)" #cinemaList [allowNavigation]="true"></app-cinemas-list>
+<app-cinemas-list (screenCreationRequested)="createScreen($event)" #cinemaList [allowNavigation]="true" (navigate)="navigate($event)"></app-cinemas-list>
 

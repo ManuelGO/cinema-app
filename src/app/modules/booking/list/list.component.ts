@@ -36,8 +36,6 @@ export class ListComponent {
       .subscribe();
   }
   addItem() {
-    this.bookingsService
-      .createBooking(416, 6)
-      .subscribe((response) => console.log(response));
+    this.bookingsService.createBooking(416, 6).subscribe();
   }
 }

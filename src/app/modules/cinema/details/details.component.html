@@ -1,5 +1,5 @@
 <div class="page">
-  <div>
+  <div *ngIf="cinema">
     <h1>Viewing cinema {{cinema.name}}</h1>
   </div>
   <div>
@@ -12,10 +12,10 @@
   </div>
   <div class="table-container">
     <div class="left-table">
-      <app-table-base [displayedColumns]="displayedColumns" [dataSource]="screenDataSource" [totalElements]="cinema.screens.length" tableCaption="Screens"></app-table-base>
+      <app-table-base [displayedColumns]="screensColumns" [dataSource]="screenDataSource" [totalElements]="screensTotal" [totalElements]="10" tableCaption="Screens"></app-table-base>
     </div>
     <div class="right-table">
-      <app-table-base [displayedColumns]="displayedColumns" [dataSource]="screeningDataSource" [totalElements]="screeningTotal" tableCaption="Screenings"></app-table-base>
+      <app-table-base [displayedColumns]="screeningsColumns" [dataSource]="screeningDataSource" [totalElements]="screeningsTotal" tableCaption="Screenings"></app-table-base>
     </div>
   </div>
 </div>

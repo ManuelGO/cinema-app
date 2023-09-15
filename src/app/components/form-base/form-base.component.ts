@@ -74,6 +74,6 @@ export class FormBaseComponent<T> implements OnInit {
           }
         })
       )
-      .subscribe((r: any) => console.log(r));
+      .subscribe();
   }
 }

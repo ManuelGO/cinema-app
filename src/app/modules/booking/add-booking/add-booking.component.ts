@@ -56,6 +56,6 @@ export class AddBookingComponent {
         this.selectedScreen.id!,
         +this.fromGroup.controls.seats.value!
       )
-      .subscribe((r) => console.log(r));
+      .subscribe();
   }
 }

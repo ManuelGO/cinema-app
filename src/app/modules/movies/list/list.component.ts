@@ -34,6 +34,6 @@ export class ListComponent {
   addItem() {
     this.dialogService
       .showFormDialog(this.moviesService, EntityType.MOVIE)
-      .subscribe((l) => console.log(l));
+      .subscribe();
   }
 }
