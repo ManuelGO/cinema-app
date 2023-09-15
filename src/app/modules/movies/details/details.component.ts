@@ -13,10 +13,6 @@ export class DetailsComponent implements OnInit {
   form!: FormGroup;
   constructor(private router: Router, private fb: FormBuilder) {
     this.movie = this.router.getCurrentNavigation()?.extras.state as Movie;
-    this.form = this.fb.group({
-      //  searchText: [],
-    });
-    console.log('details');
   }
   ngOnInit(): void {}
 }

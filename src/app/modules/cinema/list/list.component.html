@@ -1,6 +1,5 @@
 <button mat-flat-button color="primary" (click)="addCinema()">
   Add a cinema
 </button >
-<div class="table-container">
-  <app-table-base [allowNavigation]="true"   [displayedColumns]="displayedColumns" [dataSource]="dataSource" [totalElements]="totalElements" (loadData)="loadData($event)" (addNewItem)="addScreen($event.id)"></app-table-base>
-</div>
+<app-cinemas-list (screenCreationRequested)="createScreen($event)" #cinemaList [allowNavigation]="true" (navigate)="navigate($event)"></app-cinemas-list>
+

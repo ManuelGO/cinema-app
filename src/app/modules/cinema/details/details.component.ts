@@ -1,45 +1,52 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { BaseEntity } from 'src/app/core/models/base-entity';
+import { Cinema } from 'src/app/core/models/cinema';
+import { CinemaParams } from 'src/app/core/models/cinema-params';
 import { EntityType } from 'src/app/core/models/entity-type.enum';
 import { Screening } from 'src/app/core/models/screening';
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
-import { Cinema } from './../../../core/models/cinema';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   cinema!: Cinema;
-  displayedColumns = ['id', 'name'];
+  screensColumns = ['id', 'name'];
+  screeningsColumns = ['id', 'cinemaName', 'movieName'];
   screenDataSource = new MatTableDataSource<BaseEntity>();
   screeningDataSource = new MatTableDataSource<Screening>();
-  screeningTotal!: number;
+  screeningsTotal!: number;
+  screensTotal!: number;
+  cinemaParams$: Observable<CinemaParams | null> =
+    this.cinemasService.getCurrentParams();
   private destroyRef = inject(DestroyRef);
 
   constructor(
-    private router: Router,
     private dialogService: DialogService,
     private cinemasService: CinemasService
-  ) {
-    this.cinema = this.router.getCurrentNavigation()?.extras.state as Cinema;
-
-    this.screenDataSource = new MatTableDataSource<BaseEntity>(
-      this.cinema.screens
-    );
-    this.cinemasService
-      .listScreenings(this.cinema.id!)
+  ) {}
+  ngOnInit(): void {
+    this.cinemaParams$
       .pipe(
-        tap((list) => {
-          this.screeningDataSource = new MatTableDataSource(list.content);
-          this.screeningTotal = list.numberOfElements;
-        })
+        switchMap((params) =>
+          this.cinemasService.listScreenings(params?.cinema.id!).pipe(
+            tap((list) => {
+              this.cinema = params?.cinema!;
+              this.screenDataSource = new MatTableDataSource(
+                params?.cinema.screens
+              );
+              this.screeningDataSource = new MatTableDataSource(list.content);
+              this.screeningsTotal = list.numberOfElements;
+            })
+          )
+        ),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -47,7 +54,10 @@ export class DetailsComponent {
   addScreen() {
     this.dialogService
       .showFormDialog(this.cinemasService, EntityType.SCREEN, this.cinema.id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((l) => console.log(l));
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(() => this.cinemasService.getCurrentCinema())
+      )
+      .subscribe();
   }
 }

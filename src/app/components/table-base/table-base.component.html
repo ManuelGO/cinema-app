@@ -1,5 +1,5 @@
  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="id" matSortDirection="desc">
-  <caption>Small description here</caption>
+  <caption>{{tableCaption}}</caption>
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>
 
@@ -55,9 +55,14 @@
     </button>
     </td>
   </ng-container>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+      No results.
+    </td>
+  </tr>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <ng-container *ngIf="allowNavigation; else noNav">
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="row.id" [state]="row"  class="navigation-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onNavigation(row)"  class="navigation-row"></tr>
   </ng-container>
   <ng-template #noNav>
     <tr  mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

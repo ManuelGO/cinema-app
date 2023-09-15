@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, of } from 'rxjs';
+import { Observable, delay, of } from 'rxjs';
 import { Movie } from '../../models/movie';
 import { BaseService } from '../base-service';
 
@@ -7,6 +7,13 @@ import { BaseService } from '../base-service';
   providedIn: 'root',
 })
 export class MoviesService extends BaseService<Movie> {
+  override saveItem(
+    item: Movie,
+    type?: string | undefined,
+    entityId?: number | undefined
+  ): Observable<null> {
+    throw new Error('Method not implemented.');
+  }
   override endpoint = 'movies';
 
   public testRequest() {

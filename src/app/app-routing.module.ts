@@ -37,10 +37,10 @@ const routes: Routes = [
         (m) => m.ScreeningModule
       ),
   },
-  {
-    path: '**',
-    redirectTo: 'dashboard',
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: 'dashboard',
+  // },
 ];
 
 @NgModule({

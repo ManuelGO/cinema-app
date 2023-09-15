@@ -6,7 +6,6 @@ import { tap } from 'rxjs';
 import { Cinema } from 'src/app/core/models/cinema';
 import { Movie } from 'src/app/core/models/movie';
 import { Screen } from 'src/app/core/models/screen';
-import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 import { MoviesService } from 'src/app/core/services/movies/movies.service';
 
 @Component({
@@ -20,22 +19,19 @@ export class AddScreeningComponent {
   totalElements!: number;
   pageSizes = [10, 15, 20];
 
-  cinemaColumn = ['select', 'id', 'name'];
-  cinemasDs = new MatTableDataSource<Cinema>();
-  cinemasLengh!: number;
   @ViewChild(MatStepper) stepper!: MatStepper;
 
   screensColumns = ['select', 'id', 'name'];
   screensDs = new MatTableDataSource<Screen>();
-  screensLengh!: number;
+  screensLength!: number;
 
   fromGroup = this.formBuilder.group({
     start: ['', Validators.required],
   });
+  screen!: Screen;
 
   constructor(
     private moviesService: MoviesService,
-    private cinemasService: CinemasService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -50,22 +46,17 @@ export class AddScreeningComponent {
       )
       .subscribe();
   }
-  loadCinemas(event: any) {
-    return this.cinemasService
-      .getPaginatedList(event.pageSize, event.pageIndex, '', event.sort)
-      .pipe(
-        tap((response) => {
-          this.cinemasLengh = response.totalElements;
-          this.cinemasDs = new MatTableDataSource(response.content);
-        })
-      )
-      .subscribe();
-  }
-  movieSelected(event: any) {
+
+  movieSelected(event: any): void {
     this.stepper.next();
   }
-  cinemaSelected(cinema: Cinema) {
+  cinemaSelected(cinema: Cinema): void {
     this.screensDs = new MatTableDataSource(cinema.screens);
+    this.screensLength = cinema.screens.length;
+    this.stepper.next();
+  }
+  screenSelected(screen: Screen): void {
+    this.screen = screen;
     this.stepper.next();
   }
 }

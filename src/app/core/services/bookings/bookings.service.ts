@@ -7,6 +7,13 @@ import { BaseService } from '../base-service';
   providedIn: 'root',
 })
 export class BookingsService extends BaseService<Booking> {
+  override saveItem(
+    item: Booking,
+    type?: string | undefined,
+    entityId?: number | undefined
+  ): Observable<null> {
+    throw new Error('Method not implemented.');
+  }
   override endpoint = 'bookings';
   /**
    *
