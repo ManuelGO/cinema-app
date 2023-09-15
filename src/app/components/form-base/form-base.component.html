@@ -1,35 +1,41 @@
 <div class="form-container">
-  <h1 mat-dialog-title>Add {{data.entityType | titlecase}}</h1>
+  <h1 mat-dialog-title>Add {{ data.entityType | titlecase }}</h1>
   <div mat-dialog-content>
-        <form [formGroup]="form">
-          <mat-form-field appearance="outline" >
-            <mat-label> {{data.entityType | titlecase}} name</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="name">
-          </mat-form-field>
-          <mat-form-field appearance="outline" *ngIf="data.entityType === types.MOVIE">
-            <mat-label>Movie runtime</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="runtime" type="number">
-          </mat-form-field>
-        </form>
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label> {{ data.entityType | titlecase }} name</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field
+        appearance="outline"
+        *ngIf="data.entityType === types.MOVIE"
+      >
+        <mat-label>Movie runtime</mat-label>
+        <input
+          matInput
+          placeholder="Placeholder"
+          formControlName="runtime"
+          type="number"
+        />
+      </mat-form-field>
+    </form>
   </div>
   <div mat-dialog-actions>
-    <button mat-flat-button color="primary" [disabled]="form.invalid || loadingStatus.value === status.LOADING" (click)="save()">
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid || loadingStatus.value === status.LOADING"
+      (click)="save()"
+    >
       Save
-    </button >
-    <button cdkFocusInitial mat-flat-button color="warn" (click)="close(null)">Cancel</button>
+    </button>
+    <button cdkFocusInitial mat-flat-button color="warn" (click)="close(null)">
+      Cancel
+    </button>
   </div>
   <div [ngSwitch]="loadingStatus.value">
     <span *ngSwitchCase="status.LOADING"><mat-spinner></mat-spinner></span>
     <span *ngSwitchCase="status.FAILED">failed</span>
-    <span *ngSwitchCase="status.SUCCESS">
-      Item successfully cread.
-      <button mat-flat-button color="success" routerLink="movies/1">
-        View Item
-      </button >
-    </span>
-
+    <span *ngSwitchCase="status.SUCCESS"> Item successfully cread. </span>
   </div>
 </div>
-
-
-

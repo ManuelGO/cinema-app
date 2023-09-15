@@ -2,11 +2,5 @@
   Add a movie
 </button>
 
-<div class="table-container">
-  <app-table-base
-    [displayedColumns]="displayedColumns"
-    [dataSource]="dataSource"
-    [totalElements]="totalElements"
-    (loadData)="loadData($event)"
-  ></app-table-base>
-</div>
+<app-movies-list #moviesList [displayedColumns]="displayedColumns"></app-movies-list>
+

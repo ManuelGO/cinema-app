@@ -32,7 +32,6 @@ export class CinemasListComponent {
 
   loadData(event: TableLoadEvent) {
     this.lastLoadEvent$.next(event);
-    console.log(event);
     return this.cinemasService
       .getPaginatedList(event.pageSize, event.pageIndex, '', event.sort)
       .pipe(
