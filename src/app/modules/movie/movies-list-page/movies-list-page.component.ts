@@ -4,14 +4,14 @@ import { tap } from 'rxjs';
 import { EntityType } from 'src/app/core/models/entity-type.enum';
 import { Movie } from 'src/app/core/models/movie';
 import { MoviesService } from 'src/app/core/services/movies/movies.service';
-import { DialogService } from './../../../core/services/dialog/dialog.service';
+import { DialogService } from '../../../core/services/dialog/dialog.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-movies-list-page',
+  templateUrl: './movies-list-page.component.html',
+  styleUrls: ['./movies-list-page.component.scss'],
 })
-export class ListComponent {
+export class MoviesListPageComponent {
   displayedColumns = ['id', 'name', 'runtime'];
   dataSource = new MatTableDataSource<Movie>();
   totalElements!: number;
