@@ -2,15 +2,7 @@
   <mat-stepper [linear]="true" #stepper>
     <mat-step>
       <ng-template matStepLabel>Select a Movie </ng-template>
-      <div class="table-container">
-        <app-table-base
-          [displayedColumns]="moviesColumns"
-          [dataSource]="moviesDs"
-          [totalElements]="totalElements"
-          (loadData)="loadMovies($event)"
-          (rowSelected)="movieSelected($event)"
-        ></app-table-base>
-      </div>
+      <app-movies-list #moviesList [displayedColumns]="moviesColumns" (movieSelected)="movieSelected($event)"></app-movies-list>
       <button mat-button matStepperNext>Next</button>
     </mat-step>
     <mat-step>

@@ -1,21 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
+import { MoviesListComponent } from 'src/app/components/movies-list/movies-list.component';
 import { EntityType } from 'src/app/core/models/entity-type.enum';
 import { Movie } from 'src/app/core/models/movie';
 import { MoviesService } from 'src/app/core/services/movies/movies.service';
-import { DialogService } from './../../../core/services/dialog/dialog.service';
+import { DialogService } from '../../../core/services/dialog/dialog.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-movies-list-page',
+  templateUrl: './movies-list-page.component.html',
+  styleUrls: ['./movies-list-page.component.scss'],
 })
-export class ListComponent {
+export class MoviesListPageComponent {
   displayedColumns = ['id', 'name', 'runtime'];
   dataSource = new MatTableDataSource<Movie>();
   totalElements!: number;
   pageSizes = [10, 15, 20];
+  @ViewChild('moviesList') moviesList!: MoviesListComponent;
+
   constructor(
     private moviesService: MoviesService,
     private dialogService: DialogService
@@ -34,6 +37,7 @@ export class ListComponent {
   addItem() {
     this.dialogService
       .showFormDialog(this.moviesService, EntityType.MOVIE)
+      .pipe(finalize(() => this.moviesList.refreshData()))
       .subscribe();
   }
 }

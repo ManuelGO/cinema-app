@@ -65,6 +65,7 @@ export class FormBaseComponent<T> implements OnInit {
       .saveItem(this.form.value, this.data.entityType, this.data.entityId)
       .pipe(
         catchError((err) => {
+          console.log('error failed ');
           this.loadingStatus.next(this.status.FAILED);
           return of(err);
         }),

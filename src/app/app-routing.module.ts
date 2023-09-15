@@ -19,9 +19,7 @@ const routes: Routes = [
   {
     path: 'movies',
     loadChildren: () =>
-      import('src/app/modules/movies/movies.module').then(
-        (m) => m.MoviesModule
-      ),
+      import('src/app/modules/movie/movie.module').then((m) => m.MovieModule),
   },
   {
     path: 'bookings',
@@ -37,10 +35,10 @@ const routes: Routes = [
         (m) => m.ScreeningModule
       ),
   },
-  // {
-  //   path: '**',
-  //   redirectTo: 'dashboard',
-  // },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
+  },
 ];
 
 @NgModule({

@@ -2,20 +2,21 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MoviesListModule } from 'src/app/components/movies-list/movies-list.module';
 import { TableBaseModule } from 'src/app/components/table-base/table-base.module';
 import { MaterialModule } from 'src/app/material.module';
-import { DetailsComponent } from './details/details.component';
-import { ListComponent } from './list/list.component';
-import { MoviesRoutingModule } from './movies-routing.module';
+import { MovieRoutingModule } from './movie-routing.module';
+import { MoviesListPageComponent } from './movies-list-page/movies-list-page.component';
 
 @NgModule({
-  declarations: [ListComponent, DetailsComponent],
+  declarations: [MoviesListPageComponent],
   imports: [
     CommonModule,
-    MoviesRoutingModule,
     TableBaseModule,
     MaterialModule,
     ReactiveFormsModule,
+    MoviesListModule,
+    MovieRoutingModule,
   ],
 })
-export class MoviesModule {}
+export class MovieModule {}
