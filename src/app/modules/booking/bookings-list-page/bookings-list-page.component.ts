@@ -7,11 +7,11 @@ import { TableLoadEvent } from 'src/app/core/models/table-load-event';
 import { BookingsService } from 'src/app/core/services/bookings/bookings.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-bookings-list-page',
+  templateUrl: './bookings-list-page.component.html',
+  styleUrls: ['./bookings-list-page.component.scss'],
 })
-export class ListComponent {
+export class BookingsListPageComponent {
   displayedColumns = ['id'];
   dataSource = new MatTableDataSource<Booking>();
   totalElements!: number;
