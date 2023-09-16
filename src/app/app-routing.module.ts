@@ -17,6 +17,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'screens',
+    loadChildren: () =>
+      import('src/app/modules/screen/screen.module').then(
+        (m) => m.ScreenModule
+      ),
+  },
+  {
     path: 'movies',
     loadChildren: () =>
       import('src/app/modules/movie/movie.module').then((m) => m.MovieModule),

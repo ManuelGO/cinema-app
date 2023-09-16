@@ -5,6 +5,7 @@ import { Cinema } from '../../models/cinema';
 import { CinemaParams } from '../../models/cinema-params';
 import { EntityType } from '../../models/entity-type.enum';
 import { PageableResponse } from '../../models/pageable-response';
+import { Screen } from '../../models/screen';
 import { Screening, ScreeningRaw } from '../../models/screening';
 import { BaseService } from '../base-service';
 
@@ -69,5 +70,11 @@ export class CinemasService extends BaseService<Cinema> {
         })
       )
       .subscribe();
+  }
+
+  getAllScrens(): Observable<Screen[]> {
+    return this.getAllPages().pipe(
+      map((response) => response.map((cinema) => cinema.screens).flat())
+    );
   }
 }
