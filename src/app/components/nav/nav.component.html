@@ -6,7 +6,7 @@
       <span class="menu-title">MENU</span>
       <mat-nav-list *ngFor="let item of menuItems; trackBy: trackByItems">
         <a mat-list-item [routerLink]="'/'+item.name">
-          <span class="material-symbols-outlined">home</span>
+          <span class="material-symbols-outlined">{{item.icon}}</span>
           <span>{{item.name | titlecase}}</span>
         </a>
       </mat-nav-list>
