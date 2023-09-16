@@ -1,27 +1,28 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar><img src="assets/images/cinema-app-logo.png" class="logo" alt="logo"></mat-toolbar>
     <mat-nav-list>
+      <span class="menu-title">MENU</span>
       <mat-nav-list *ngFor="let item of menuItems; trackBy: trackByItems">
-        <a  mat-list-item [routerLink]="'/'+item.name"> {{item.name | titlecase}} </a>
-        </mat-nav-list>
+        <a mat-list-item [routerLink]="'/'+item.name">
+          <span class="material-symbols-outlined">{{item.icon}}</span>
+          <span>{{item.name | titlecase}}</span>
+        </a>
+      </mat-nav-list>
     </mat-nav-list>
 
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+      <button *ngIf="isHandset$ | async" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>cinema-app</span>
+        <span><img src="assets/images/avatar.png" alt="Avatar" class="avatar"></span>
+        <span class="avatar-name">
+          <h5>Manuel González</h5>
+          <h6>Admin</h6>
+        </span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

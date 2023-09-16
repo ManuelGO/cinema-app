@@ -48,7 +48,7 @@
   <ng-container matColumnDef="create">
     <th mat-header-cell *matHeaderCellDef>  </th>
     <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation(); addItem(element)">
-      <button mat-button>
+      <button mat-stroked-button>
         <mat-icon>add</mat-icon>
         Add screens
     </button>
@@ -72,6 +72,5 @@
 <mat-paginator
   #paginator
   [length]="totalElements"
-  [pageSizeOptions]="pageSizes"
-  aria-label="Select page of users">
+  [pageSizeOptions]="pageSizes">
 </mat-paginator>

@@ -9,15 +9,11 @@
       </app-card>
     </mat-grid-tile>
     <!--Charts-->
-    <mat-grid-tile *ngFor="let i of [5, 6, 7, 8]" [colspan]="( cardLayout | async )?.chart?.cols"
+    <mat-grid-tile *ngFor="let i of [5, 6]" [colspan]="( cardLayout | async )?.chart?.cols"
       [rowspan]="( cardLayout | async )?.chart?.rows">
       <app-card title="Card {{i}}">
-        <div>big card</div>
+        <div></div>
       </app-card>
-    </mat-grid-tile>
-    <!--Table-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
-      <app-card title="Card 9"><div>Table Content Here</div></app-card>
     </mat-grid-tile>
   </mat-grid-list>
  </div>

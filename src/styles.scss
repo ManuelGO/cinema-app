@@ -1,23 +1,71 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html,
+body {
+  height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Poppins', sans-serif; color: #5d6d81;}
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif !important;
+  color: #5d6d81 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+.mat-mdc-header-row,
+.mdc-list-item__primary-text,
+.mat-mdc-card-title,
+.mat-mdc-row,
+.mdc-data-table__content,
+.mat-step-label,
+.mat-mdc-paginator,
+.mat-mdc-form-field {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.mdc-list-item__primary-text {
+  color: #fff !important;
+  font-size: 14px !important;
+}
+
+.mat-drawer-container {
+  background: #f8f9fc !important;
+}
 
 .table-container {
-  padding: 20px
-}
-
-table .mat-mdc-table, thead {
-  border-radius: 15px !important;
-  overflow: hidden !important;
-}
-
-.mat-mdc-row, .mat-mdc-cell {
-  border-bottom: 1px solid #d8e2ef !important;
-  border-top: 0 !important;
+  padding: 20px;
 }
 
 thead {
   background-color: #f9fafd !important;
+}
+
+.mat-mdc-table {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.0509803922) !important;
+}
+
+button {
+  letter-spacing: 0 !important;
+}
+
+table button {
+  font-size: 12px !important;
+}
+
+.top-button {
+  margin: 20px 20px 0px 20px;
+  font-size: 12px !important;
+}
+
+.top-button button,
+.mat-step-icon-selected {
+  background-color: #727cf5 !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__content {
+  padding-top: 10px !important;
 }
