@@ -12,6 +12,7 @@ import { CardComponent } from './components/card/card.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormBaseComponent } from './components/form-base/form-base.component';
 import { NavComponent } from './components/nav/nav.component';
+import { TableBaseModule } from './components/table-base/table-base.module';
 import { httpInterceptorProviders } from './core/services/http-interceptors';
 import { MaterialModule } from './material.module';
 
@@ -30,6 +31,7 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule,
     NgChartsModule,
     ReactiveFormsModule,
+    TableBaseModule,
     MaterialModule,
   ],
   providers: [
