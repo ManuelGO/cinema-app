@@ -1,5 +1,5 @@
 <div>
-  <mat-stepper [linear]="isLinear" #stepper>
+  <mat-stepper [orientation]="(stepperOrientation | async)!" #stepper  animationDuration="800">
     <mat-step>
       <ng-template matStepLabel>Select a Cinema </ng-template>
       <app-cinemas-list
@@ -27,7 +27,7 @@
         <ng-template matStepLabel>Number of seats to book</ng-template>
         <mat-form-field>
           <mat-label>Seats to book</mat-label>
-          <input matInput placeholder="" formControlName="seats" required />
+          <input matInput placeholder="" type='number' formControlName="seats" required />
         </mat-form-field>
 
         <div>

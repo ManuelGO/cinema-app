@@ -1,8 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, ViewChild, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Cinema } from 'src/app/core/models/cinema';
 import { Screening } from 'src/app/core/models/screening';
 import { BookingsService } from 'src/app/core/services/bookings/bookings.service';
@@ -15,23 +17,28 @@ import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 })
 export class AddBookingComponent {
   fromGroup = this.formBuilder.group({
-    seats: ['', Validators.required],
+    seats: ['', [Validators.required, Validators.min(1)]],
   });
-  isLinear = false;
   cinemasColumns = ['id', 'name', 'select'];
-  screeningsColumns = ['id', 'cinemaName', 'movieName', 'select'];
+  screeningsColumns = ['id', 'cinemaName', 'movieName', 'startDate', 'select'];
   dataSource = new MatTableDataSource<Cinema>();
   screeningsDs = new MatTableDataSource<Screening>();
   screeningLength!: number;
   @ViewChild(MatStepper) stepper!: MatStepper;
   selectedScreening!: Screening;
   cinemaSelected!: Cinema;
+  private breakpointObserver = inject(BreakpointObserver);
+  stepperOrientation: Observable<StepperOrientation>;
 
   constructor(
     private formBuilder: FormBuilder,
     private cinemasService: CinemasService,
     private bookingsService: BookingsService
-  ) {}
+  ) {
+    this.stepperOrientation = this.breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+  }
 
   setScreeningDs(cinema: Cinema) {
     this.cinemaSelected = cinema;
@@ -57,6 +64,7 @@ export class AddBookingComponent {
         this.selectedScreening.id!,
         +this.fromGroup.controls.seats.value!
       )
+      .pipe(tap(() => this.stepper.reset()))
       .subscribe();
   }
 }

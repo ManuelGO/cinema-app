@@ -23,16 +23,18 @@ export class SnackbarInterceptor implements HttpInterceptor {
           if (event instanceof HttpResponse && event.status === 201) {
             this.snackBar.open('Item saved successfully.', 'close', {
               duration: 3000,
-              panelClass: 'successSnack',
             });
           }
         }
       }),
       catchError((error) => {
-        this.snackBar.open('Something went wrong. Try again later.', 'close', {
-          duration: 3000,
-          panelClass: 'errorSnack',
-        });
+        this.snackBar.open(
+          `Something went wrong. Try again later. Error code ${error.status}`,
+          'close',
+          {
+            duration: 500000,
+          }
+        );
         return of(error);
       })
     );
