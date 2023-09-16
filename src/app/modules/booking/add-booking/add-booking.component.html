@@ -29,6 +29,7 @@
           <mat-label>Seats to book</mat-label>
           <input matInput placeholder="" formControlName="seats" required />
         </mat-form-field>
+
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext [disabled]="fromGroup.invalid">
@@ -39,14 +40,20 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Sumary</ng-template>
-      <div>
-        We're going to create a booking for screen
-        {{ selectedScreen?.name || selectedScreen?.id }} with
-        {{ fromGroup.controls.seats.value }} seats.
+
+      <div class="centered-notification" *ngIf="selectedScreening">
+        <h3>
+          We're going to create a booking in Cinema
+          <strong>{{ selectedScreening.cinemaName }}</strong
+          >, for movie <strong>{{ selectedScreening.movieName }} </strong> on
+          <strong> {{ selectedScreening.startDate | date : "medium" }}</strong>
+          , with <strong>{{ fromGroup.controls.seats.value }} </strong> seats.
+        </h3>
         <button mat-flat-button color="primary" (click)="addBooking()">
-          Add the booking
+          Book
         </button>
       </div>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
@@ -56,6 +63,6 @@
 </div>
 <ng-template #noScreening>
   <div class="centered-notification">
-    <h3>There is not screenings for CinemaName</h3>
+    <h3>There is not screenings for {{ cinemaSelected.name }}</h3>
   </div>
 </ng-template>

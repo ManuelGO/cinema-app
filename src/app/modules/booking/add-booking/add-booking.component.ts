@@ -4,7 +4,6 @@ import { MatStepper } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs/operators';
 import { Cinema } from 'src/app/core/models/cinema';
-import { Screen } from 'src/app/core/models/screen';
 import { Screening } from 'src/app/core/models/screening';
 import { BookingsService } from 'src/app/core/services/bookings/bookings.service';
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
@@ -25,7 +24,8 @@ export class AddBookingComponent {
   screeningsDs = new MatTableDataSource<Screening>();
   screeningLength!: number;
   @ViewChild(MatStepper) stepper!: MatStepper;
-  selectedScreen!: Screen;
+  selectedScreening!: Screening;
+  cinemaSelected!: Cinema;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,6 +34,7 @@ export class AddBookingComponent {
   ) {}
 
   setScreeningDs(cinema: Cinema) {
+    this.cinemaSelected = cinema;
     this.cinemasService
       .listScreenings(cinema.id!)
       .pipe(
@@ -45,15 +46,15 @@ export class AddBookingComponent {
       )
       .subscribe();
   }
-  screeningSelected(screen: Screen) {
-    this.selectedScreen = screen;
+  screeningSelected(screening: Screening) {
+    this.selectedScreening = screening;
     this.stepper.next();
   }
 
   addBooking() {
     this.bookingsService
       .createBooking(
-        this.selectedScreen.id!,
+        this.selectedScreening.id!,
         +this.fromGroup.controls.seats.value!
       )
       .subscribe();
