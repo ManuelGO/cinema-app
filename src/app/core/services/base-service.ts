@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DEFAULT_SORT } from '../constants/global.constans';
 import { PageableResponse } from '../models/pageable-response';
 @Injectable()
 export abstract class BaseService<T> {
@@ -10,7 +11,7 @@ export abstract class BaseService<T> {
     pageSize: number,
     pageIndex: number,
     searchText: string = '',
-    sort: string = 'id,desc'
+    sort: string = DEFAULT_SORT
   ): Observable<PageableResponse<T>> {
     const params = new HttpParams()
       .set('size', pageSize)

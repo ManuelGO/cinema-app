@@ -7,13 +7,6 @@ import { BaseService } from '../base-service';
   providedIn: 'root',
 })
 export class BookingsService extends BaseService<Booking> {
-  override saveItem(
-    item: Booking,
-    type?: string | undefined,
-    entityId?: number | undefined
-  ): Observable<null> {
-    throw new Error('Method not implemented.');
-  }
   override endpoint = 'bookings';
   /**
    *
@@ -25,8 +18,16 @@ export class BookingsService extends BaseService<Booking> {
    */
   createBooking(screeningId: number, numSeats: number): Observable<Booking> {
     return this.http.put<Booking>(this.endpoint, {
-      screeningId: 407,
+      screeningId: screeningId,
       seat: numSeats,
     });
+  }
+
+  override saveItem(
+    item: Booking,
+    type?: string | undefined,
+    entityId?: number | undefined
+  ): Observable<null> {
+    throw new Error('Method not implemented.');
   }
 }

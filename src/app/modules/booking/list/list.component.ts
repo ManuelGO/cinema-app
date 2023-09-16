@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs';
+import { DEFAULT_PAGES_SIZE } from 'src/app/core/constants/global.constans';
 import { Booking } from 'src/app/core/models/booking';
+import { TableLoadEvent } from 'src/app/core/models/table-load-event';
 import { BookingsService } from 'src/app/core/services/bookings/bookings.service';
-import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-list',
@@ -12,21 +12,17 @@ import { DialogService } from 'src/app/core/services/dialog/dialog.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['id'];
   dataSource = new MatTableDataSource<Booking>();
   totalElements!: number;
-  pageSizes = [4];
+  pageSizes = DEFAULT_PAGES_SIZE;
   isLoading!: boolean;
 
-  constructor(
-    private bookingsService: BookingsService,
-    private _formBuilder: FormBuilder,
-    private dialogService: DialogService
-  ) {}
+  constructor(private bookingsService: BookingsService) {}
 
-  loadData(event: any) {
+  loadData(event: TableLoadEvent) {
     return this.bookingsService
-      .getPaginatedList(event.pageSize, event.pageIndex)
+      .getPaginatedList(event.pageSize, event.pageIndex, '', event.sort)
       .pipe(
         tap((response) => {
           this.totalElements = response.totalElements;
@@ -34,8 +30,5 @@ export class ListComponent {
         })
       )
       .subscribe();
-  }
-  addItem() {
-    this.bookingsService.createBooking(416, 6).subscribe();
   }
 }
