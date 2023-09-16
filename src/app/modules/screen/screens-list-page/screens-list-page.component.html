@@ -1,0 +1,10 @@
+
+<div class="table-container">
+  <app-table-base
+    [displayedColumns]="displayedColumns"
+    [dataSource]="dataSource"
+    [totalElements]="totalElements"
+    [pageSizes]="pageSizes"
+    (loadData)="loadData($event)"
+  ></app-table-base>
+</div>
