@@ -2,17 +2,22 @@
   <mat-stepper [linear]="isLinear" #stepper>
     <mat-step>
       <ng-template matStepLabel>Select a Cinema </ng-template>
-      <app-cinemas-list [displayedColumns]="cinemasColumns" (cinemaSelected)="setScreeningDs($event)"></app-cinemas-list>
-
+      <app-cinemas-list
+        [displayedColumns]="cinemasColumns"
+        (cinemaSelected)="setScreeningDs($event)"
+      ></app-cinemas-list>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Select a Screening </ng-template>
-      <app-table-base
-        [displayedColumns]="screeningsColumns"
-        [dataSource]="screeningsDs"
-        [totalElements]="screeningLength"
-        (rowSelected)="screeningSelected($event)"
-      ></app-table-base>
+      <ng-container *ngIf="screeningLength !== 0; else noScreening">
+        <app-table-base
+          [displayedColumns]="screeningsColumns"
+          [dataSource]="screeningsDs"
+          [totalElements]="screeningLength"
+          (rowSelected)="screeningSelected($event)"
+        ></app-table-base>
+      </ng-container>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
       </div>
@@ -49,3 +54,8 @@
     </mat-step>
   </mat-stepper>
 </div>
+<ng-template #noScreening>
+  <div class="centered-notification">
+    <h3>There is not screenings for CinemaName</h3>
+  </div>
+</ng-template>
