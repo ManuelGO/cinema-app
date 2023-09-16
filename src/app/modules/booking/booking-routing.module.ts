@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddBookingComponent } from './add-booking/add-booking.component';
-import { ListComponent } from './list/list.component';
+import { BookingsListPageComponent } from './bookings-list-page/bookings-list-page.component';
 
 const routes: Routes = [
   {
@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent,
+        component: BookingsListPageComponent,
       },
       {
         path: 'add-booking',

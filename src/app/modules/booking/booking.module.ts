@@ -7,10 +7,10 @@ import { TableBaseModule } from 'src/app/components/table-base/table-base.module
 import { MaterialModule } from 'src/app/material.module';
 import { AddBookingComponent } from './add-booking/add-booking.component';
 import { BookingRoutingModule } from './booking-routing.module';
-import { ListComponent } from './list/list.component';
+import { BookingsListPageComponent } from './bookings-list-page/bookings-list-page.component';
 
 @NgModule({
-  declarations: [ListComponent, AddBookingComponent],
+  declarations: [AddBookingComponent, BookingsListPageComponent],
   imports: [
     CommonModule,
     BookingRoutingModule,

@@ -1,18 +1,23 @@
 <div>
-  <mat-stepper [linear]="isLinear" #stepper>
+  <mat-stepper [orientation]="(stepperOrientation | async)!" #stepper  animationDuration="800">
     <mat-step>
       <ng-template matStepLabel>Select a Cinema </ng-template>
-      <app-cinemas-list [displayedColumns]="cinemasColumns" (cinemaSelected)="setScreeningDs($event)"></app-cinemas-list>
-
+      <app-cinemas-list
+        [displayedColumns]="cinemasColumns"
+        (cinemaSelected)="setScreeningDs($event)"
+      ></app-cinemas-list>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Select a Screening </ng-template>
-      <app-table-base
-        [displayedColumns]="screeningsColumns"
-        [dataSource]="screeningsDs"
-        [totalElements]="screeningLength"
-        (rowSelected)="screeningSelected($event)"
-      ></app-table-base>
+      <ng-container *ngIf="screeningLength !== 0; else noScreening">
+        <app-table-base
+          [displayedColumns]="screeningsColumns"
+          [dataSource]="screeningsDs"
+          [totalElements]="screeningLength"
+          (rowSelected)="screeningSelected($event)"
+        ></app-table-base>
+      </ng-container>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
       </div>
@@ -22,8 +27,9 @@
         <ng-template matStepLabel>Number of seats to book</ng-template>
         <mat-form-field>
           <mat-label>Seats to book</mat-label>
-          <input matInput placeholder="" formControlName="seats" required />
+          <input matInput placeholder="" type='number' formControlName="seats" required />
         </mat-form-field>
+
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext [disabled]="fromGroup.invalid">
@@ -34,14 +40,20 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Sumary</ng-template>
-      <div>
-        We're going to create a booking for screen
-        {{ selectedScreen?.name || selectedScreen?.id }} with
-        {{ fromGroup.controls.seats.value }} seats.
+
+      <div class="centered-notification" *ngIf="selectedScreening">
+        <h3>
+          We're going to create a booking in Cinema
+          <strong>{{ selectedScreening.cinemaName }}</strong
+          >, for movie <strong>{{ selectedScreening.movieName }} </strong> on
+          <strong> {{ selectedScreening.startDate | date : "medium" }}</strong>
+          , with <strong>{{ fromGroup.controls.seats.value }} </strong> seats.
+        </h3>
         <button mat-flat-button color="primary" (click)="addBooking()">
-          Add the booking
+          Book
         </button>
       </div>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
@@ -49,3 +61,8 @@
     </mat-step>
   </mat-stepper>
 </div>
+<ng-template #noScreening>
+  <div class="centered-notification">
+    <h3>There is not screenings for {{ cinemaSelected.name }}</h3>
+  </div>
+</ng-template>
