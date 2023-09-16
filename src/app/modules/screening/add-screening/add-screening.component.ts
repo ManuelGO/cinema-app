@@ -15,6 +15,9 @@ import { MoviesService } from 'src/app/core/services/movies/movies.service';
 })
 export class AddScreeningComponent {
   moviesColumns = ['select', 'id', 'name', 'runtime'];
+  cinemasColumns = ['select', 'id', 'name', 'screens'];
+  screensColunms = ['select', 'id', 'name'];
+
   moviesDs = new MatTableDataSource<Movie>();
   totalElements!: number;
   pageSizes = [10, 15, 20];
