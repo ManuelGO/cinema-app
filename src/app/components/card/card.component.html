@@ -1,9 +1,14 @@
 <mat-card class="dashboard-card">
-  <mat-card-content class="dashboard-card-content">
-    <div class="number-cinemas">3.000</div>
-    <div class="cinemas">cinemas</div>
-    <div class="per-cinemas">
-      <span>+3.5%</span>
-    </div>
-  </mat-card-content>
+  <ng-container *ngIf="!dataSource; else tableContent">
+    <mat-card-content class="dashboard-card-content">
+      <div class="number-cinemas">{{ total }}</div>
+      <div class="cinemas">{{ title }}</div>
+      <div class="per-cinemas">
+        <span>+3.5%</span>
+      </div>
+    </mat-card-content>
+  </ng-container>
 </mat-card>
+<ng-template #tableContent>
+  <app-table-base [dataSource]="dataSource" [displayedColumns]="['name']"></app-table-base>
+</ng-template>

@@ -9,8 +9,6 @@ export class DialogService {
   constructor(private dialog: MatDialog) {}
   showFormDialog<T>(service: T, entityType?: string, entityId?: number) {
     const dialogRef = this.dialog.open(FormBaseComponent<T>, {
-      width: '40%',
-      height: '40%',
       data: {
         service,
         entityType,
