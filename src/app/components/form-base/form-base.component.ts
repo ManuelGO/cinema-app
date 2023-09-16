@@ -6,9 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject, catchError, finalize, of } from 'rxjs';
+import { finalize } from 'rxjs';
 import { EntityType } from 'src/app/core/models/entity-type.enum';
-import { LoadingStatus } from 'src/app/core/models/loading-status.enum';
 import { BaseService } from 'src/app/core/services/base-service';
 
 @Component({
@@ -18,9 +17,8 @@ import { BaseService } from 'src/app/core/services/base-service';
 })
 export class FormBaseComponent<T> implements OnInit {
   form!: FormGroup;
-  status = LoadingStatus;
   types = EntityType;
-  loadingStatus = new BehaviorSubject<string>('');
+  isLoading = false;
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<FormBaseComponent<T>>,
@@ -60,21 +58,10 @@ export class FormBaseComponent<T> implements OnInit {
   }
 
   save() {
-    this.loadingStatus.next(this.status.LOADING);
+    this.isLoading = true;
     this.data.service
       .saveItem(this.form.value, this.data.entityType, this.data.entityId)
-      .pipe(
-        catchError((err) => {
-          console.log('error failed ');
-          this.loadingStatus.next(this.status.FAILED);
-          return of(err);
-        }),
-        finalize(() => {
-          if (this.loadingStatus.value !== 'failed') {
-            this.loadingStatus.next(this.status.SUCCESS);
-          }
-        })
-      )
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe();
   }
 }

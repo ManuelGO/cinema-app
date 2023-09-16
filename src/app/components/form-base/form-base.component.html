@@ -24,7 +24,7 @@
     <button
       mat-flat-button
       color="primary"
-      [disabled]="form.invalid || loadingStatus.value === status.LOADING"
+      [disabled]="form.invalid || isLoading"
       (click)="save()"
     >
       Save
@@ -32,10 +32,5 @@
     <button cdkFocusInitial mat-flat-button color="warn" (click)="close(null)">
       Cancel
     </button>
-  </div>
-  <div [ngSwitch]="loadingStatus.value">
-    <span *ngSwitchCase="status.LOADING"><mat-spinner></mat-spinner></span>
-    <span *ngSwitchCase="status.FAILED">failed</span>
-    <span *ngSwitchCase="status.SUCCESS"> Item successfully cread. </span>
   </div>
 </div>
