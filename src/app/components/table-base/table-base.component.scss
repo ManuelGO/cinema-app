@@ -20,9 +20,11 @@ table .mat-mdc-table, thead {
 .mat-mdc-row, .mat-mdc-cell {
   border-bottom: 1px solid #edf2f9 !important;
   border-top: 0 !important;
-  cursor: pointer;
 }
 
 thead {
   background-color: #f9fafd !important;
+}
+.navigation-row {
+  cursor: pointer;
 }
