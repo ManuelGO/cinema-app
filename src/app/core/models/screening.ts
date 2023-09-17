@@ -15,3 +15,8 @@ export interface ScreeningRaw {
   start: string;
   movie: Movie;
 }
+
+export interface ScreeningRequest {
+  movieId: number;
+  startTime: string;
+}

@@ -1,54 +1,73 @@
-<div>
-  <!-- PUT /cinemas/{c_id}/screens/{s_id}/screenings
-    JSON Body {movieId: ...., startTime: ....}
-   -->
-  <mat-stepper [linear]="true" #stepper>
-    <mat-step>
-      <ng-template matStepLabel>Select a Movie </ng-template>
-      <app-movies-list #moviesList [displayedColumns]="moviesColumns" (movieSelected)="movieSelected($event)"></app-movies-list>
-      <button mat-button matStepperNext>Next</button>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Select a Cinema</ng-template>
-      <app-cinemas-list
-        [displayedColumns]="cinemasColumns"
-        (cinemaSelected)="cinemaSelected($event)"
-      ></app-cinemas-list>
+<mat-stepper [linear]="true" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Select a Movie </ng-template>
+    <app-movies-list
+      #moviesList
+      [displayedColumns]="moviesColumns"
+      (movieSelected)="movieSelected($event)"
+    ></app-movies-list>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Select a Cinema</ng-template>
+    <app-cinemas-list
+      [displayedColumns]="cinemasColumns"
+      (cinemaSelected)="cinemaSelected($event)"
+    ></app-cinemas-list>
 
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Select a Screen </ng-template>
-      <div class="table-container">
-        <app-table-base
-          [displayedColumns]="screensColunms"
-          [dataSource]="screensDs"
-          [totalElements]="screensLength"
-          (rowSelected)="screenSelected($event)"
-        ></app-table-base>
-      </div>
-    </mat-step>
-    <mat-step>
-      <div>
-
-        <form [formGroup]="formGroup">
-          <ng-template matStepLabel>Set the date and time</ng-template>
-          <app-date-time-picker [dateControl]="startTime"></app-date-time-picker>
-        </form>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext [disabled]="formGroup.invalid">Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Sumary</ng-template>
-
-      We're going to create a screen for 'movie name' at 'cinma name' on
-      Septhember the 8th at 18:00
+    <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </mat-step>
-  </mat-stepper>
-</div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Select a Screen </ng-template>
+    <div
+      class="table-container"
+      *ngIf="cinema?.screens?.length; else noScreens"
+    >
+      <app-table-base
+        [displayedColumns]="screensColumns"
+        [dataSource]="screensDs"
+        [totalElements]="screensLength"
+        (rowSelected)="screenSelected($event)"
+      ></app-table-base>
+    </div>
+    <button mat-button matStepperPrevious>Back</button>
+  </mat-step>
+  <mat-step>
+    <div>
+      <form [formGroup]="formGroup">
+        <ng-template matStepLabel>Set the date and time</ng-template>
+        <app-date-time-picker [dateControl]="startTime"></app-date-time-picker>
+      </form>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext [disabled]="formGroup.invalid">
+        Next
+      </button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Sumary</ng-template>
+    <ng-container *ngIf="movie && cinema">
+      <div class="centered-notification">
+        <h3>
+          We're going to screen <strong>{{ movie.name }}</strong> at
+          <strong>{{ cinema.name }}</strong> on
+          {{ startTime.value | date : "medium" }}.
+        </h3>
+        <button mat-flat-button color="primary" (click)="createScreening()">
+          Create Screening
+        </button>
+      </div>
+    </ng-container>
+
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+</mat-stepper>
+<ng-template #noScreens>
+  <div class="centered-notification">
+    <h3>
+      <strong>{{ cinema?.name }} </strong>has no screens.
+    </h3>
+  </div>
+</ng-template>

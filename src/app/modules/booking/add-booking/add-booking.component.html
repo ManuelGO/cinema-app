@@ -1,5 +1,9 @@
 <div>
-  <mat-stepper [orientation]="(stepperOrientation | async)!" #stepper  animationDuration="800">
+  <mat-stepper
+    [orientation]="(stepperOrientation | async)!"
+    #stepper
+    animationDuration="800"
+  >
     <mat-step>
       <ng-template matStepLabel>Select a Cinema </ng-template>
       <app-cinemas-list
@@ -22,17 +26,23 @@
         <button mat-button matStepperPrevious>Back</button>
       </div>
     </mat-step>
-    <mat-step [stepControl]="fromGroup">
-      <form [formGroup]="fromGroup">
+    <mat-step [stepControl]="formGroup">
+      <form [formGroup]="formGroup">
         <ng-template matStepLabel>Number of seats to book</ng-template>
         <mat-form-field>
           <mat-label>Seats to book</mat-label>
-          <input matInput placeholder="" type='number' formControlName="seats" required />
+          <input
+            matInput
+            placeholder=""
+            type="number"
+            formControlName="seats"
+            required
+          />
         </mat-form-field>
 
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext [disabled]="fromGroup.invalid">
+          <button mat-button matStepperNext [disabled]="formGroup.invalid">
             Next
           </button>
         </div>
@@ -47,7 +57,7 @@
           <strong>{{ selectedScreening.cinemaName }}</strong
           >, for movie <strong>{{ selectedScreening.movieName }} </strong> on
           <strong> {{ selectedScreening.startDate | date : "medium" }}</strong>
-          , with <strong>{{ fromGroup.controls.seats.value }} </strong> seats.
+          , with <strong>{{ formGroup.controls.seats.value }} </strong> seats.
         </h3>
         <button mat-flat-button color="primary" (click)="addBooking()">
           Book

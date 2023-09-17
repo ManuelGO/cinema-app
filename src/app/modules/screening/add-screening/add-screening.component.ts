@@ -3,10 +3,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap } from 'rxjs';
+import { DEFAULT_PAGES_SIZE } from 'src/app/core/constants/global.constans';
 import { Cinema } from 'src/app/core/models/cinema';
 import { Movie } from 'src/app/core/models/movie';
 import { Screen } from 'src/app/core/models/screen';
-import { MoviesService } from 'src/app/core/services/movies/movies.service';
+import { ScreeningRequest } from 'src/app/core/models/screening';
+import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 
 @Component({
   selector: 'app-add-screening',
@@ -16,15 +18,14 @@ import { MoviesService } from 'src/app/core/services/movies/movies.service';
 export class AddScreeningComponent {
   moviesColumns = ['select', 'id', 'name', 'runtime'];
   cinemasColumns = ['select', 'id', 'name', 'screens'];
-  screensColunms = ['select', 'id', 'name'];
+  screensColumns = ['select', 'id', 'name'];
 
   moviesDs = new MatTableDataSource<Movie>();
   totalElements!: number;
-  pageSizes = [10, 15, 20];
+  pageSizes = DEFAULT_PAGES_SIZE;
 
   @ViewChild(MatStepper) stepper!: MatStepper;
 
-  screensColumns = ['select', 'id', 'name'];
   screensDs = new MatTableDataSource<Screen>();
   screensLength!: number;
 
@@ -32,28 +33,31 @@ export class AddScreeningComponent {
     startTime: ['', Validators.required],
   });
   screen!: Screen;
+  movie!: Movie;
+  cinema!: Cinema;
 
   constructor(
-    private moviesService: MoviesService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cinemasService: CinemasService
   ) {}
 
-  loadMovies(event: any) {
-    return this.moviesService
-      .getPaginatedList(event.pageSize, event.pageIndex)
-      .pipe(
-        tap((response) => {
-          this.totalElements = response.totalElements;
-          this.moviesDs = new MatTableDataSource(response.content);
-        })
-      )
+  createScreening() {
+    const screening: ScreeningRequest = {
+      movieId: this.movie.id!,
+      startTime: this.startTime.value!,
+    };
+    this.cinemasService
+      .screateScreening(screening, this.cinema.id!, this.screen.id!)
+      .pipe(tap(() => this.stepper.reset()))
       .subscribe();
   }
 
-  movieSelected(event: any): void {
+  movieSelected(movie: Movie): void {
+    this.movie = movie;
     this.stepper.next();
   }
   cinemaSelected(cinema: Cinema): void {
+    this.cinema = cinema;
     this.screensDs = new MatTableDataSource(cinema.screens);
     this.screensLength = cinema.screens.length;
     this.stepper.next();

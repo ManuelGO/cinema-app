@@ -6,7 +6,11 @@ import { CinemaParams } from '../../models/cinema-params';
 import { EntityType } from '../../models/entity-type.enum';
 import { PageableResponse } from '../../models/pageable-response';
 import { Screen } from '../../models/screen';
-import { Screening, ScreeningRaw } from '../../models/screening';
+import {
+  Screening,
+  ScreeningRaw,
+  ScreeningRequest,
+} from '../../models/screening';
 import { BaseService } from '../base-service';
 
 @Injectable({
@@ -75,6 +79,17 @@ export class CinemasService extends BaseService<Cinema> {
   getAllScrens(): Observable<Screen[]> {
     return this.getAllPages().pipe(
       map((response) => response.map((cinema) => cinema.screens).flat())
+    );
+  }
+
+  screateScreening(
+    screening: ScreeningRequest,
+    cinemaId: number,
+    screenId: number
+  ): Observable<null> {
+    return this.http.put<null>(
+      `${this.endpoint}/${cinemaId}/screens/${screenId}/screenings`,
+      screening
     );
   }
 }

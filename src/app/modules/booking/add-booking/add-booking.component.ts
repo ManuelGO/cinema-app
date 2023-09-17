@@ -16,7 +16,7 @@ import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
   styleUrls: ['./add-booking.component.scss'],
 })
 export class AddBookingComponent {
-  fromGroup = this.formBuilder.group({
+  formGroup = this.formBuilder.group({
     seats: ['', [Validators.required, Validators.min(1)]],
   });
   cinemasColumns = ['id', 'name', 'select'];
@@ -61,8 +61,8 @@ export class AddBookingComponent {
   addBooking() {
     this.bookingsService
       .createBooking(
-        this.selectedScreening.id!,
-        +this.fromGroup.controls.seats.value!
+        this.selectedScreening.id,
+        +this.formGroup.controls.seats.value!
       )
       .pipe(tap(() => this.stepper.reset()))
       .subscribe();
