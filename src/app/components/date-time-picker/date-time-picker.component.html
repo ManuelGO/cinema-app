@@ -1,0 +1,11 @@
+<mat-form-field>
+  <input matInput [ngxMatDatetimePicker]="pickerCustomIcon" placeholder="Choose a date"
+    [formControl]="dateControl"  [formControl]="dateControl">
+  <ngx-mat-datepicker-toggle matSuffix [for]="pickerCustomIcon"></ngx-mat-datepicker-toggle>
+  <ngx-mat-datetime-picker #pickerCustomIcon color="primary">
+    <ngx-mat-datepicker-actions>
+      <button mat-button ngxMatDatepickerCancel>Cancel</button>
+      <button mat-raised-button color="primary" ngxMatDatepickerApply>Apply</button>
+    </ngx-mat-datepicker-actions>
+  </ngx-mat-datetime-picker>
+</mat-form-field>
