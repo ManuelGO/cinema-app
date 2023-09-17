@@ -10,7 +10,6 @@ import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 @Component({
   selector: 'app-cinemas-list',
   templateUrl: './cinemas-list.component.html',
-  styleUrls: ['./cinemas-list.component.scss'],
 })
 export class CinemasListComponent {
   @Input() displayedColumns = ['id', 'name', 'screens', 'create'];

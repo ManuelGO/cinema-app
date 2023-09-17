@@ -15,7 +15,6 @@ import { MoviesService } from 'src/app/core/services/movies/movies.service';
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.scss'],
 })
 export class MoviesListComponent {
   @Input() displayedColumns = ['id', 'name', 'screens', 'create'];
