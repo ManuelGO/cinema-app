@@ -1,15 +1,9 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { InjectionToken } from '@angular/core';
 import { AppModule } from './app/app.module';
 import { Config } from './app/core/models/config';
+import { APP_CONFIG } from './tokens/app-config.token';
 
-// config.token.ts
-export const APP_CONFIG: InjectionToken<Config> = new InjectionToken<Config>(
-  'Config'
-);
-
-// ---
 fetch('./assets/config/config.json')
   .then((res) => res.json())
   .then((config: Config) => {
