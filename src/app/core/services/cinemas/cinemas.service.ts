@@ -21,7 +21,7 @@ export class CinemasService extends BaseService<Cinema> {
   cinemaParams$: BehaviorSubject<CinemaParams | null> =
     new BehaviorSubject<CinemaParams | null>(null);
 
-  saveItem(
+  override saveItem(
     newItem: Cinema,
     type?: string,
     entityId?: number

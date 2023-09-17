@@ -9,7 +9,6 @@ import { BookingsService } from 'src/app/core/services/bookings/bookings.service
 @Component({
   selector: 'app-bookings-list-page',
   templateUrl: './bookings-list-page.component.html',
-  styleUrls: ['./bookings-list-page.component.scss'],
 })
 export class BookingsListPageComponent {
   displayedColumns = ['id'];
