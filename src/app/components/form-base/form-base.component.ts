@@ -48,7 +48,6 @@ export class FormBaseComponent<T> implements OnInit {
           Validators.min(1),
         ])
       );
-    } else if (this.data.entityType === this.types.CINEMA) {
     }
   }
 
