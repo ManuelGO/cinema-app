@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddBookingComponent } from './add-booking/add-booking.component';
+import { AddBookingPageComponent } from './add-booking-page/add-booking-page.component';
 import { BookingsListPageComponent } from './bookings-list-page/bookings-list-page.component';
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path: 'add-booking',
-        component: AddBookingComponent,
+        component: AddBookingPageComponent,
       },
     ],
   },
