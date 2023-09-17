@@ -14,5 +14,9 @@ class FormModal {
   get nameInput() {
     return cy.get('[data-cy="name-input"]');
   }
+
+  get runtimeInput() {
+    return cy.get('[data-cy="runtime-input"]');
+  }
 }
 export default new FormModal();
