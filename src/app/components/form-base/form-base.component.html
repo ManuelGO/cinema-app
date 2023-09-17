@@ -1,10 +1,10 @@
-<div class="form-container">
+<div class="form-container" data-cy="form-container">
   <h3 mat-dialog-title>Add {{ data.entityType | titlecase }}</h3>
   <div mat-dialog-content>
     <form [formGroup]="form">
       <mat-form-field appearance="outline">
         <mat-label> {{ data.entityType | titlecase }} name</mat-label>
-        <input matInput placeholder="Placeholder" formControlName="name" />
+        <input matInput placeholder="Placeholder" formControlName="name" data-cy="name-input"/>
       </mat-form-field>
       <mat-form-field
         appearance="outline"
@@ -16,6 +16,7 @@
           placeholder="Placeholder"
           formControlName="runtime"
           type="number"
+          data-cy="runtime-input"
         />
       </mat-form-field>
     </form>
@@ -26,10 +27,17 @@
       color="primary"
       [disabled]="form.invalid || isLoading"
       (click)="save()"
+      data-cy="save-btn"
     >
       Save
     </button>
-    <button cdkFocusInitial mat-flat-button color="warn" (click)="close(null)">
+    <button
+      cdkFocusInitial
+      mat-flat-button
+      color="warn"
+      (click)="close(null)"
+      data-cy="cancel-btn"
+    >
       Cancel
     </button>
   </div>
