@@ -1,0 +1,6 @@
+::ng-deep .mat-datepicker-content {
+  background-color: white !important;
+  & .mat-calendar-body-selected {
+    background-color: #727cf5;
+  }
+}

@@ -28,8 +28,8 @@ export class AddScreeningComponent {
   screensDs = new MatTableDataSource<Screen>();
   screensLength!: number;
 
-  fromGroup = this.formBuilder.group({
-    start: ['', Validators.required],
+  formGroup = this.formBuilder.group({
+    startTime: ['', Validators.required],
   });
   screen!: Screen;
 
@@ -61,5 +61,8 @@ export class AddScreeningComponent {
   screenSelected(screen: Screen): void {
     this.screen = screen;
     this.stepper.next();
+  }
+  get startTime() {
+    return this.formGroup.controls.startTime;
   }
 }
