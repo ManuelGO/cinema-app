@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, switchMap, tap } from 'rxjs';
@@ -11,14 +11,14 @@ import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss'],
+  selector: 'app-cinema-details-page',
+  templateUrl: './cinema-details-page.component.html',
+  styleUrls: ['./cinema-details-page.component.css'],
 })
-export class DetailsComponent implements OnInit {
+export class CinemaDetailsPageComponent {
   cinema!: Cinema;
   screensColumns = ['id', 'name'];
-  screeningsColumns = ['id', 'cinemaName', 'movieName'];
+  screeningsColumns = ['id', 'cinemaName', 'movieName', 'startDate'];
   screenDataSource = new MatTableDataSource<BaseEntity>();
   screeningDataSource = new MatTableDataSource<Screening>();
   screeningsTotal!: number;
