@@ -1,14 +1,9 @@
 <mat-card class="dashboard-card" data-cy="dashboard-card">
-  <ng-container *ngIf="!dataSource; else tableContent">
+  <ng-container>
     <mat-card-content class="dashboard-card-content">
       <div class="number-items" data-cy="total-items">{{ total }}</div>
       <div class="item-title" data-cy="item-title">{{ title }}</div>
     </mat-card-content>
   </ng-container>
 </mat-card>
-<ng-template #tableContent>
-  <app-table-base
-    [dataSource]="dataSource"
-    [displayedColumns]="['name']"
-  ></app-table-base>
-</ng-template>
+

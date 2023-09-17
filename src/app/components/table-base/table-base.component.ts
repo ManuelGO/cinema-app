@@ -23,6 +23,7 @@ export class TableBaseComponent<T> implements AfterViewInit {
   @Input() allowNavigation: boolean = false;
   @Input() pageSizes = [10, 15, 20];
   @Input() tableCaption!: string;
+  @Input() allowSorting: boolean = false;
   @Output() loadData = new EventEmitter<any>();
   @Output() addNewItem = new EventEmitter<any>();
   @Output() rowSelected = new EventEmitter<any>();
