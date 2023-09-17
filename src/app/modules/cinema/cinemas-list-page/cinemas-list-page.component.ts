@@ -10,11 +10,10 @@ import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-cinemas-list-page',
+  templateUrl: './cinemas-list-page.component.html',
 })
-export class ListComponent {
+export class CinemasListPageComponent {
   displayedColumns = ['id', 'name', 'screens', 'create'];
   dataSource = new MatTableDataSource<Cinema>();
   totalElements!: number;
