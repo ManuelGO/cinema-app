@@ -45,7 +45,6 @@ export class MoviesListComponent {
   }
 
   refreshData() {
-    console.log('refresh');
     this.loadData({
       pageIndex: DEFAULT_PAGE_INDEX,
       pageSize: DEFAULT_PAGE_SIZE,

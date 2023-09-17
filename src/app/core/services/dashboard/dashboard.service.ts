@@ -29,7 +29,6 @@ export class DashboardService {
       .pipe(
         tap((response) => {
           this.moviesDs = new MatTableDataSource(response.content);
-          console.log(response.content);
         }),
         map((response) => response.totalElements)
       );
