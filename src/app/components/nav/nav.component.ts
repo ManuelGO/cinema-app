@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { DashboardService } from 'src/app/core/services/dashboard/dashboard.service';
 import { menuItems } from './menu-items';
 
@@ -22,8 +22,6 @@ export class NavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
-      tap((r) => console.log(r)),
-
       map((result) => result.matches),
       shareReplay()
     );

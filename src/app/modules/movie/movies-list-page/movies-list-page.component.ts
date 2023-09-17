@@ -10,7 +10,6 @@ import { DialogService } from '../../../core/services/dialog/dialog.service';
 @Component({
   selector: 'app-movies-list-page',
   templateUrl: './movies-list-page.component.html',
-  styleUrls: ['./movies-list-page.component.scss'],
 })
 export class MoviesListPageComponent {
   displayedColumns = ['id', 'name', 'runtime'];

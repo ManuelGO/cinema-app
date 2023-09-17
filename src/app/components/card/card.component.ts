@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-card',
@@ -9,5 +8,4 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CardComponent {
   @Input() title!: string;
   @Input() total!: number;
-  @Input() dataSource!: MatTableDataSource<any>;
 }

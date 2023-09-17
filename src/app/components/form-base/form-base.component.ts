@@ -13,7 +13,6 @@ import { BaseService } from 'src/app/core/services/base-service';
 @Component({
   selector: 'app-form-base',
   templateUrl: './form-base.component.html',
-  styleUrls: ['./form-base.component.scss'],
 })
 export class FormBaseComponent<T> implements OnInit {
   form!: FormGroup;
@@ -49,7 +48,6 @@ export class FormBaseComponent<T> implements OnInit {
           Validators.min(1),
         ])
       );
-    } else if (this.data.entityType === this.types.CINEMA) {
     }
   }
 

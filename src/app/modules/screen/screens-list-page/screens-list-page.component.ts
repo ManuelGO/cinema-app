@@ -9,7 +9,6 @@ import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 @Component({
   selector: 'app-screens-list-page',
   templateUrl: './screens-list-page.component.html',
-  styleUrls: ['./screens-list-page.component.scss'],
 })
 export class ScreensListPageComponent {
   displayedColumns = ['name', 'id'];

@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APP_CONFIG } from 'src/main';
+import { APP_CONFIG } from 'src/tokens/app-config.token';
 import { Config } from '../../models/config';
 
 @Injectable()
