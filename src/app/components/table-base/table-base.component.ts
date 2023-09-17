@@ -61,15 +61,15 @@ export class TableBaseComponent<T> implements AfterViewInit {
   /**
    * Output event emitted to create a new entity.
    */
-  @Output() addNewItem = new EventEmitter<T>();
+  @Output() addNewItem = new EventEmitter<any>();
   /**
    * Output event emitted when a row is selected.
    */
-  @Output() rowSelected = new EventEmitter<T>();
+  @Output() rowSelected = new EventEmitter<any>();
   /**
    * Output event emitted when a navigation action is triggered, we pass the row information lo be used in the route.
    */
-  @Output() navigate = new EventEmitter<T>();
+  @Output() navigate = new EventEmitter<any>();
   /**
    * ViewChild decorator used to access the Angular Material Paginator component.
    */
