@@ -11,11 +11,11 @@ import { BookingsService } from 'src/app/core/services/bookings/bookings.service
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
 
 @Component({
-  selector: 'app-add-booking',
-  templateUrl: './add-booking.component.html',
-  styleUrls: ['./add-booking.component.scss'],
+  selector: 'app-add-booking-page',
+  templateUrl: './add-booking-page.component.html',
+  styleUrls: ['./add-booking-page.component.css'],
 })
-export class AddBookingComponent {
+export class AddBookingPageComponent {
   formGroup = this.formBuilder.group({
     seats: ['', [Validators.required, Validators.min(1)]],
   });
