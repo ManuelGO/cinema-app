@@ -7,11 +7,11 @@ import { DateTimePickerModule } from 'src/app/components/date-time-picker/date-t
 import { MoviesListModule } from 'src/app/components/movies-list/movies-list.module';
 import { TableBaseModule } from 'src/app/components/table-base/table-base.module';
 import { MaterialModule } from 'src/app/material.module';
-import { AddScreeningComponent } from './add-screening/add-screening.component';
+import { AddScreeningPageComponent } from './add-screening-page/add-screening-page.component';
 import { ScreeningRoutingModule } from './screening-routing.module';
 
 @NgModule({
-  declarations: [AddScreeningComponent],
+  declarations: [AddScreeningPageComponent],
   imports: [
     CommonModule,
     MaterialModule,

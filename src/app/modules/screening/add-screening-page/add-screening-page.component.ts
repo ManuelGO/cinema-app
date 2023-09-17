@@ -9,13 +9,12 @@ import { Movie } from 'src/app/core/models/movie';
 import { Screen } from 'src/app/core/models/screen';
 import { ScreeningRequest } from 'src/app/core/models/screening';
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
-
 @Component({
-  selector: 'app-add-screening',
-  templateUrl: './add-screening.component.html',
-  styleUrls: ['./add-screening.component.scss'],
+  selector: 'app-add-screening-page',
+  templateUrl: './add-screening-page.component.html',
+  styleUrls: ['./add-screening-page.component.css'],
 })
-export class AddScreeningComponent {
+export class AddScreeningPageComponent {
   moviesColumns = ['select', 'id', 'name', 'runtime'];
   cinemasColumns = ['select', 'id', 'name', 'screens'];
   screensColumns = ['select', 'id', 'name'];
