@@ -1,4 +1,5 @@
-<mat-stepper [linear]="true" #stepper>
+<mat-stepper   [orientation]="(stepperOrientation$ | async)!"
+#stepper>
   <mat-step>
     <ng-template matStepLabel>Select a Movie </ng-template>
     <app-movies-list

@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { DEFAULT_PAGES_SIZE } from 'src/app/core/constants/global.constans';
 import { Cinema } from 'src/app/core/models/cinema';
 import { Movie } from 'src/app/core/models/movie';
 import { Screen } from 'src/app/core/models/screen';
 import { ScreeningRequest } from 'src/app/core/models/screening';
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
+import { ResponsiveService } from 'src/app/core/services/responsive/responsive.service';
 @Component({
   selector: 'app-add-screening-page',
   templateUrl: './add-screening-page.component.html',
@@ -31,13 +32,16 @@ export class AddScreeningPageComponent {
   formGroup = this.formBuilder.group({
     startTime: ['', Validators.required],
   });
+  stepperOrientation$: Observable<StepperOrientation> =
+    this.responsiveService.stepperOrientation$;
   screen!: Screen;
   movie!: Movie;
   cinema!: Cinema;
 
   constructor(
     private formBuilder: FormBuilder,
-    private cinemasService: CinemasService
+    private cinemasService: CinemasService,
+    private responsiveService: ResponsiveService
   ) {}
 
   createScreening() {

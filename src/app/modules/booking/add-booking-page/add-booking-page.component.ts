@@ -1,14 +1,14 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { tap } from 'rxjs/operators';
 import { Cinema } from 'src/app/core/models/cinema';
 import { Screening } from 'src/app/core/models/screening';
 import { BookingsService } from 'src/app/core/services/bookings/bookings.service';
 import { CinemasService } from 'src/app/core/services/cinemas/cinemas.service';
+import { ResponsiveService } from 'src/app/core/services/responsive/responsive.service';
 
 @Component({
   selector: 'app-add-booking-page',
@@ -27,18 +27,14 @@ export class AddBookingPageComponent {
   @ViewChild(MatStepper) stepper!: MatStepper;
   selectedScreening!: Screening;
   cinemaSelected!: Cinema;
-  private breakpointObserver = inject(BreakpointObserver);
-  stepperOrientation: Observable<StepperOrientation>;
-
+  stepperOrientation$: Observable<StepperOrientation> =
+    this.responsiveService.stepperOrientation$;
   constructor(
     private formBuilder: FormBuilder,
     private cinemasService: CinemasService,
-    private bookingsService: BookingsService
-  ) {
-    this.stepperOrientation = this.breakpointObserver
-      .observe('(min-width: 800px)')
-      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
-  }
+    private bookingsService: BookingsService,
+    private responsiveService: ResponsiveService
+  ) {}
 
   setScreeningDs(cinema: Cinema) {
     this.cinemaSelected = cinema;
